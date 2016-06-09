@@ -24,6 +24,28 @@ USPtr SceneNode::detachChild(const SceneNode & node)
 	return res;
 }
 
+void SceneNode::update(sf::Time dt)
+{
+	updateChildren(dt);
+	updateCurrent(dt);
+}
+
+sf::Transform SceneNode::getWorldTransform() const
+{
+	sf::Transform trans = sf::Transform::Identity;
+	for (const auto node = this; node != nullptr; node->parent)
+	{
+		trans = node->getTransform() *trans;
+	}
+
+	return trans;
+}
+
+sf::Vector2f SceneNode::getWorldPosition() const
+{
+	return getWorldTransform() * sf::Vector2f();
+}
+
 void SceneNode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
@@ -32,6 +54,22 @@ void SceneNode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	for (auto &child : children)
 	{
 		child->draw(target, states);
+	}
+}
+
+void SceneNode::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
+{
+}
+
+void SceneNode::updateCurrent(sf::Time dt)
+{
+}
+
+void SceneNode::updateChildren(sf::Time dt)
+{
+	for (auto &child : children)
+	{
+		child->update(dt);
 	}
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "TextureHolder.h"
+#include "World.h"
 
 class Game
 {
@@ -16,8 +16,8 @@ private:
 
 private:
 	sf::RenderWindow window;
-	TextureHolder textures;
-	sf::Sprite player;
+	
+	World world;
 
 	bool isUp;
 	bool isDown;

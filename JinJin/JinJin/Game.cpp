@@ -3,14 +3,9 @@
 
 const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 
-Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), textures(), player()
+Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), world(window)
 {
-	textures.load(Textures::Player, "Media/Sprites/1.png");
-
-	player.setTexture(textures.get(Textures::Player));
-	player.setPosition(500.f, 200.f);
-
-	speed = 400;
+	
 	isDown = false; isUp = false; isRight = false; isLeft = false;
 }
 
@@ -77,13 +72,15 @@ void Game::update(sf::Time deltaTime)
 	if (isRight)
 		movement.x += speed;
 
-	player.move(movement * deltaTime.asSeconds());
+	world.update(deltaTime);
 }
 
 void Game::render()
 {
 	window.clear();
-	window.draw(player);
+	world.draw();
+
+	window.setView(window.getDefaultView());
 	window.display();
 }
 

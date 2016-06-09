@@ -1,8 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "SceneNode.h"
 
-class Entity
+class Entity : public SceneNode
 {
 public:
 	void setVelocity(sf::Vector2f velocity);
@@ -11,5 +12,7 @@ public:
 
 private:
 	sf::Vector2f velocity;
+
+	virtual void updateCurrent(sf::Time dt);
 };
 
