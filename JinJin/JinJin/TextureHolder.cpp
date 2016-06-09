@@ -1,5 +1,5 @@
 #include "TextureHolder.h"
-#include <assert.h>
+#include <cassert>
 
 void TextureHolder::load(Textures::ID id, const std::string & filename)
 {
@@ -25,4 +25,15 @@ const sf::Texture & TextureHolder::get(Textures::ID id) const
 	auto found = textureMap.find(id);
 	assert(found != textureMap.end());
 	return *found->second;
+}
+
+Textures::ID TextureHolder::toTextureID(char c)
+{
+	switch (c)
+	{
+	case 'b':
+		return Textures::Background;
+	case 'p':
+		return Textures::Player;
+	}
 }

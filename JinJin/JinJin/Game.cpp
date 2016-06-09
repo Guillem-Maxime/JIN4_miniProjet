@@ -3,11 +3,11 @@
 
 const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 
-Game::Game() : window(sf::VideoMode(1600, 900), "SFML works!"), textures(), player()
+Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), textures(), player()
 {
-	textures.load(Textures::Airplane, "Media/Sprites/1.png");
+	textures.load(Textures::Player, "Media/Sprites/1.png");
 
-	player.setTexture(textures.get(Textures::Airplane));
+	player.setTexture(textures.get(Textures::Player));
 	player.setPosition(500.f, 200.f);
 
 	speed = 400;

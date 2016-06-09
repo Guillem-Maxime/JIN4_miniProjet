@@ -8,7 +8,7 @@ namespace Textures
 {
 	enum ID
 	{
-		Landscape, Airplane, Missile
+		Background, Player, Platform, Lamp
 	};
 }
 
@@ -21,6 +21,7 @@ public:
 	void load(Textures::ID id, const std::string& filename);
 	sf::Texture& get(Textures::ID id);
 	const sf::Texture& get(Textures::ID id) const;
-
+	
+	Textures::ID toTextureID(char c);
 };
 
