@@ -89,9 +89,17 @@ void World::buildScene()
 	player->setVelocity(0.f, 0.f);
 	sceneLayers[Front]->attachChild(std::move(mainChar));
 
-	std::unique_ptr<Plateform> p1 = std::make_unique<Plateform>(textures);
-	p1->setPosition(400, 400);
-	sceneLayers[Front]->attachChild(std::move(p1));
+	std::vector<sf::Vector2f> pos;
+	pos.push_back(sf::Vector2f(400, 400));
+	pos.push_back(sf::Vector2f(800, 410));
+	pos.push_back(sf::Vector2f(200, 800));
+
+	for (auto position : pos)
+	{
+		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures);
+		p->setPosition(position);
+		sceneLayers[Front]->attachChild(std::move(p));
+	}
 
 
 
