@@ -61,6 +61,7 @@ CommandQueue & World::getCommandQueue()
 void World::loadTextures()
 {
 	textures.load(Textures::Player, "Media/Sprites/1.png");
+	textures.load(Textures::Platform, "Media/Sprites/2.png");
 	textures.load(Textures::Background, "Media/Tiles/1.jpg");
 }
 
@@ -87,6 +88,10 @@ void World::buildScene()
 	player->setPosition(spawnPosition);
 	player->setVelocity(0.f, 0.f);
 	sceneLayers[Front]->attachChild(std::move(mainChar));
+
+	std::unique_ptr<Plateform> p1 = std::make_unique<Plateform>(textures);
+	p1->setPosition(400, 400);
+	sceneLayers[Front]->attachChild(std::move(p1));
 
 
 

@@ -3,6 +3,7 @@
 #include "TextureHolder.h"
 #include "SceneNode.h"
 #include "Player.h"
+#include "Plateform.h"
 #include "SpriteNode.h"
 #include "CommandQueue.h"
 #include "Command.h"
