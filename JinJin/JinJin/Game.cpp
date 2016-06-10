@@ -3,10 +3,9 @@
 
 const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 
-Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), world(window)
+Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), world(window), evHandler()
 {
-	
-	isDown = false; isUp = false; isRight = false; isLeft = false;
+
 }
 
 void Game::run()
@@ -29,48 +28,24 @@ void Game::run()
 
 void Game::processEvents()
 {
+	CommandQueue& commands = world.getCommandQueue();
+
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		switch (event.type)
+		evHandler.handleEvent(event, commands);
+		if(event.type == sf::Event::Closed)
 		{
-		case sf::Event::KeyPressed:
-			handlePlayerInput(event.key.code, true);
-			break;
-		case sf::Event::KeyReleased:
-			handlePlayerInput(event.key.code, false);
-			break;
-		case sf::Event::Closed:
 			window.close();
-			break;
 		}
 	}
+
+	evHandler.handleRealtimeInput(commands);
 }
 
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
-	if (key == sf::Keyboard::Z)
-		isUp = isPressed;
-	else if (key == sf::Keyboard::S)
-		isDown = isPressed;
-	else if (key == sf::Keyboard::Q)
-		isLeft = isPressed;
-	else if (key == sf::Keyboard::D)
-		isRight = isPressed;
-
-}
 
 void Game::update(sf::Time deltaTime)
 {
-	sf::Vector2f movement(0.f, 0.f);
-	if (isUp)
-		movement.y -= speed;
-	if (isDown)
-		movement.y += speed;
-	if (isLeft)
-		movement.x -= speed;
-	if (isRight)
-		movement.x += speed;
 
 	world.update(deltaTime);
 }

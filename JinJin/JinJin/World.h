@@ -1,9 +1,13 @@
 #pragma once
-#include <SFML\Graphics.hpp>
+
 #include "TextureHolder.h"
 #include "SceneNode.h"
 #include "Player.h"
 #include "SpriteNode.h"
+#include "CommandQueue.h"
+#include "Command.h"
+
+#include <SFML\Graphics.hpp>
 
 #include <array>
 #include <memory>
@@ -14,6 +18,8 @@ public:
 	explicit World(sf::RenderWindow &window);
 	void update(sf::Time dt);
 	void draw();
+
+	CommandQueue& getCommandQueue();
 
 private:
 	void loadTextures();
@@ -37,6 +43,8 @@ private:
 	sf::Vector2f spawnPosition;
 	
 	Player* player;
+
+	CommandQueue comQueue;
 
 
 };

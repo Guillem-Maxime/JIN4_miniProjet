@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <cassert>
 
+#include "Command.h"
+
 class SceneNode : public sf::Drawable, public sf::Transformable, private sf::NonCopyable
 {
 public:
@@ -21,6 +23,10 @@ public:
 
 	sf::Transform getWorldTransform() const;
 	sf::Vector2f getWorldPosition() const;
+
+	virtual unsigned int getCategory() const;
+
+	void onCommand(const Command& command, sf::Time dt);
 
 private:
 

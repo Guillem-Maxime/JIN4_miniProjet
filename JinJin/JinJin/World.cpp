@@ -1,6 +1,7 @@
 #include "World.h"
 
-World::World(sf::RenderWindow & window) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,2000.f,2000.f)
+
+World::World(sf::RenderWindow & window) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
 , spawnPosition(worldView.getSize().x/2.f, worldView.getSize().y / 2.f)
 ,player(nullptr)
 {
@@ -12,15 +13,49 @@ World::World(sf::RenderWindow & window) : window(window), worldView(window.getDe
 
 void World::update(sf::Time dt)
 {
-	worldView.move(player->getVelocity() * dt.asSeconds());
+	
+	player->setVelocity(0.f, 0.f);
+
+	while (!comQueue.isEmpty())
+		sceneGraph.onCommand(comQueue.pop(), dt);
 
 	sceneGraph.update(dt);
+
+	
+	const float borderDistance = 200.f;
+
+	sf::Vector2f position = player->getPosition();
+	position.x = std::max(position.x, worldBounds.left + borderDistance);
+	position.x = std::min(position.x, worldBounds.left + worldBounds.width - borderDistance);
+	position.y = std::max(position.y, worldBounds.top + borderDistance);
+	position.y = std::min(position.y, worldBounds.top + worldBounds.height - borderDistance);
+
+	player->setPosition(position);
+
+	sf::FloatRect viewBounds(worldView.getCenter() - worldView.getSize() / 2.f, worldView.getSize());
+
+
+	worldView.move(player->getVelocity() * dt.asSeconds());
+
+	sf::Vector2f center = worldView.getCenter();
+	center.x = std::min(center.x, worldBounds.width -borderDistance );
+	center.x = std::max(center.x, 0.f + borderDistance);
+	center.y = std::min(center.y, worldBounds.height -borderDistance);
+	center.y = std::max(center.y, 0.f + borderDistance);
+
+	worldView.setCenter(center);
+
 }
 
 void World::draw()
 {
 	window.setView(worldView);
 	window.draw(sceneGraph);
+}
+
+CommandQueue & World::getCommandQueue()
+{
+	return comQueue;
 }
 
 void World::loadTextures()
@@ -50,7 +85,7 @@ void World::buildScene()
 	std::unique_ptr<Player> mainChar = std::make_unique<Player>(textures);
 	player = mainChar.get();
 	player->setPosition(spawnPosition);
-	player->setVelocity(10.f, 2.f);
+	player->setVelocity(0.f, 0.f);
 	sceneLayers[Front]->attachChild(std::move(mainChar));
 
 

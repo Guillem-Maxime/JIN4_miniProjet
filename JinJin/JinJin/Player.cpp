@@ -10,3 +10,8 @@ void Player::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) con
 {
 	target.draw(sprite, states);
 }
+
+unsigned int Player::getCategory() const
+{
+	return Category::Player;
+}
