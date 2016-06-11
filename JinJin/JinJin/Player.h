@@ -14,8 +14,14 @@ public:
 	bool getGrounded();
 	void setGrounded(bool g);
 
+	void jump(float playerspeed);
+
 private:
 	sf::Sprite sprite;
 	bool grounded;
+
+	bool jumping;
+
+	sf::Time jumpTime;
 	
 };

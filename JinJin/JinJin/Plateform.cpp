@@ -18,5 +18,8 @@ unsigned int Plateform::getCategory() const
 
 sf::FloatRect Plateform::getBoundingRect() const
 {
-	return getWorldTransform().transformRect(sprite.getGlobalBounds());
+	sf::FloatRect a = sprite.getGlobalBounds();
+	a.height /= 30;
+	return getWorldTransform().transformRect(a);
+	
 }

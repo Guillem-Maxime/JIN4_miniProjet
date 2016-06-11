@@ -2,6 +2,7 @@
 
 
 
+
 void Entity::setVelocity(sf::Vector2f velocity)
 {
 	this->velocity = velocity;

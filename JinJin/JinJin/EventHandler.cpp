@@ -18,6 +18,7 @@ struct PlayerMover
 	sf::Vector2f velocity;
 };
 
+
 void EventHandler::handleEvent(const sf::Event & event, CommandQueue & commands)
 {
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
@@ -35,32 +36,29 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 {
 	const float playerspeed = 10.f;
 
+	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 	{
 		Command moveUp;
 		moveUp.category = Category::Player;
-		moveUp.action = derivedAction<Player>(PlayerMover(0.f, -playerspeed));
+		moveUp.action = derivedAction<Player>([playerspeed](Player& player, sf::Time) {
+			player.jump(playerspeed);
+		});
 		commands.push(moveUp);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		Command moveUp;
-		moveUp.category = Category::Player;
-		moveUp.action = derivedAction<Player>(PlayerMover(0.f, playerspeed));
-		commands.push(moveUp);
+		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
 		Command moveUp;
 		moveUp.category = Category::Player;
-		moveUp.action = derivedAction<Player>(PlayerMover(-playerspeed, 0.f));
+		moveUp.action = derivedAction<Player>(PlayerMover(-0.75*playerspeed, 0.f));
 		commands.push(moveUp);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		Command moveUp;
 		moveUp.category = Category::Player;
-		moveUp.action = derivedAction<Player>(PlayerMover(playerspeed, 0.f));
+		moveUp.action = derivedAction<Player>(PlayerMover(0.75*playerspeed, 0.f));
 		commands.push(moveUp);
 	}
 }

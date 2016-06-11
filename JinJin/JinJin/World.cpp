@@ -104,6 +104,9 @@ void World::buildScene()
 	pos.push_back(sf::Vector2f(200, 800));
 	pos.push_back(sf::Vector2f(600, 400));
 	pos.push_back(sf::Vector2f(700, 400));
+	pos.push_back(sf::Vector2f(350, 700));
+	pos.push_back(sf::Vector2f(500, 600));
+	pos.push_back(sf::Vector2f(550, 550));
 
 	for (auto position : pos)
 	{
