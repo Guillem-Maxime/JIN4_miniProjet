@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player(const TextureHolder & textures) : sprite(textures.get(Textures::Player))
 {
@@ -14,4 +15,19 @@ void Player::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) con
 unsigned int Player::getCategory() const
 {
 	return Category::Player;
+}
+
+sf::FloatRect Player::getBoundingRect() const
+{
+	return getWorldTransform().transformRect(sprite.getGlobalBounds());
+}
+
+bool Player::getGrounded()
+{
+	return grounded;
+}
+
+void Player::setGrounded(bool g)
+{
+	grounded = g;
 }

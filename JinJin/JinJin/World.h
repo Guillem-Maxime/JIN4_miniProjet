@@ -22,9 +22,11 @@ public:
 
 	CommandQueue& getCommandQueue();
 
+
 private:
 	void loadTextures();
 	void buildScene();
+
 
 	enum Layer
 	{
@@ -46,6 +48,8 @@ private:
 	Player* player;
 
 	CommandQueue comQueue;
+
+	bool grounded;
 
 
 };

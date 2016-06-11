@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <cassert>
+#include <set>
 
 #include "Command.h"
 
@@ -28,6 +29,11 @@ public:
 
 	void onCommand(const Command& command, sf::Time dt);
 
+	virtual sf::FloatRect getBoundingRect() const;
+	bool checkNodeCollision(SceneNode& node);
+	bool checkSceneCollision(SceneNode& sceneGraph);
+
+
 private:
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const final;
@@ -40,3 +46,5 @@ private:
 	SceneNode* parent;
 };
 
+
+bool	collision(const SceneNode& l, const SceneNode& r);

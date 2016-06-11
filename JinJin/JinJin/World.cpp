@@ -1,9 +1,11 @@
 #include "World.h"
 
+#include <iostream>
+
 
 World::World(sf::RenderWindow & window) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
-, spawnPosition(worldView.getSize().x/2.f, worldView.getSize().y / 2.f)
-,player(nullptr)
+, spawnPosition(200, 200)
+,player(nullptr), grounded(false)
 {
 	loadTextures();
 	buildScene();
@@ -14,11 +16,18 @@ World::World(sf::RenderWindow & window) : window(window), worldView(window.getDe
 void World::update(sf::Time dt)
 {
 	
-	player->setVelocity(0.f, 0.f);
+	player->setVelocity(0.f, 400.f);
 
 	while (!comQueue.isEmpty())
 		sceneGraph.onCommand(comQueue.pop(), dt);
 
+	player->setGrounded(sceneGraph.checkSceneCollision(sceneGraph));
+	if (player->getGrounded())
+	{
+		sf::Vector2f v = player->getVelocity();
+		player->setVelocity(v.x, v.y - 400.f);
+	}
+	
 	sceneGraph.update(dt);
 
 	
@@ -73,8 +82,8 @@ void World::buildScene()
 		sceneLayers[i] = layer.get();
 
 		sceneGraph.attachChild(std::move(layer));
+		
 	}
-
 	sf::Texture& texture = textures.get(Textures::Background);
 	sf::IntRect textureRect(worldBounds);
 	texture.setRepeated(true);
@@ -93,14 +102,21 @@ void World::buildScene()
 	pos.push_back(sf::Vector2f(400, 400));
 	pos.push_back(sf::Vector2f(800, 410));
 	pos.push_back(sf::Vector2f(200, 800));
+	pos.push_back(sf::Vector2f(600, 400));
+	pos.push_back(sf::Vector2f(700, 400));
 
 	for (auto position : pos)
 	{
 		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures);
 		p->setPosition(position);
 		sceneLayers[Front]->attachChild(std::move(p));
+		
 	}
 
+	
 
 
 }
+
+
+

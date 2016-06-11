@@ -1,8 +1,10 @@
 #include "SceneNode.h"
 
+#include <iostream>
+
 typedef std::unique_ptr<SceneNode> USPtr;
 
-SceneNode::SceneNode()
+SceneNode::SceneNode() : parent(nullptr), children()
 {
 }
 
@@ -33,11 +35,12 @@ void SceneNode::update(sf::Time dt)
 sf::Transform SceneNode::getWorldTransform() const
 {
 	sf::Transform trans = sf::Transform::Identity;
-	for (const auto node = this; node != nullptr; node->parent)
-	{
+
+	for (const SceneNode* node = this; node != nullptr; node = node->parent)
+	{	
 		trans = node->getTransform() *trans;
 	}
-
+	
 	return trans;
 }
 
@@ -61,6 +64,46 @@ void SceneNode::onCommand(const Command & command, sf::Time dt)
 		child->onCommand(command, dt);
 	}
 }
+
+sf::FloatRect SceneNode::getBoundingRect() const
+{
+	return sf::FloatRect();
+}
+
+bool SceneNode::checkNodeCollision(SceneNode & node)
+{
+	
+	if (this != &node && collision(*this, node))
+	{
+		return true;
+	}
+
+	for(auto& child : children)
+	{
+		if (child->checkNodeCollision(node))
+			return true;
+			
+	}
+
+	return false;
+
+}
+
+bool SceneNode::checkSceneCollision(SceneNode & sceneGraph)
+{
+	if (checkNodeCollision(sceneGraph))
+		return true;
+	
+
+	for	(auto& child : sceneGraph.children)
+	{
+		if (checkSceneCollision(*child))
+			return true;
+	}
+	return false;
+}
+
+
 
 void SceneNode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
@@ -89,5 +132,7 @@ void SceneNode::updateChildren(sf::Time dt)
 	}
 }
 
-
-
+bool collision(const SceneNode & l, const SceneNode & r)
+{
+	return l.getBoundingRect().intersects(r.getBoundingRect());
+}

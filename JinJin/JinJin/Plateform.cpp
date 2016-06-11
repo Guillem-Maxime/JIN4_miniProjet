@@ -15,3 +15,8 @@ unsigned int Plateform::getCategory() const
 {
 	return Category::Platform;
 }
+
+sf::FloatRect Plateform::getBoundingRect() const
+{
+	return getWorldTransform().transformRect(sprite.getGlobalBounds());
+}
