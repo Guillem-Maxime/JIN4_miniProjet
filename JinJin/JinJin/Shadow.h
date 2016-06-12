@@ -10,7 +10,10 @@ public:
 
 	virtual sf::FloatRect getBoundingRect() const;
 
+	void inverse();
+
 private:
 	sf::Sprite sprite;
+	bool inversed;
 };
 

@@ -7,6 +7,7 @@ namespace Category
 		Scene = 1 << 0,
 		Player = 1 << 1,
 		Platform = 1 << 2,
-		Text = 1 << 3,
+		Shadow = 1 <<3,
+		Text = 1 << 4,
 	};
 }

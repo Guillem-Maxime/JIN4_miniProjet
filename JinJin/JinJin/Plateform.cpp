@@ -1,6 +1,6 @@
 #include "Plateform.h"
 
-Plateform::Plateform(const TextureHolder & textures) : sprite(textures.get(Textures::Platform))
+Plateform::Plateform(const TextureHolder & textures) : sprite(textures.get(Textures::Platform)), inversed(false)
 {
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
@@ -18,8 +18,19 @@ unsigned int Plateform::getCategory() const
 
 sf::FloatRect Plateform::getBoundingRect() const
 {
-	sf::FloatRect a = sprite.getGlobalBounds();
-	a.height /= 30;
-	return getWorldTransform().transformRect(a);
+	if (!inversed)
+	{
+		sf::FloatRect a = sprite.getGlobalBounds();
+		a.height /= 30;
+		return getWorldTransform().transformRect(a);
+	} else
+	{
+		return sf::FloatRect();
+	}
 	
+}
+
+void Plateform::inverse()
+{
+	inversed = !inversed;
 }

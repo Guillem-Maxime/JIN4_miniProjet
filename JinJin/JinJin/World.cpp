@@ -125,7 +125,7 @@ void World::buildScene()
 		sceneLayers[Front]->attachChild(std::move(p));*/
 
 		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures);
-		float a = -30 * 0.003*position.x;
+		float a = -30.f * 0.003*position.x;
 		p->setPosition(sf::Vector2f(a, -20));
 		
 		std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures);

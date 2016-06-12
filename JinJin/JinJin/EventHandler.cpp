@@ -1,6 +1,8 @@
 #include "EventHandler.h"
 #include "CommandQueue.h"
 #include "Player.h"
+#include "Plateform.h"
+#include "Shadow.h"
 
 #include <iostream>
 
@@ -29,6 +31,22 @@ void EventHandler::handleEvent(const sf::Event & event, CommandQueue & commands)
 			std::cout << s.getPosition().x << "," << s.getPosition().y << std::endl;
 		};
 		commands.push(output);
+	}
+
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
+	{
+		Command output;
+		output.category = Category::Platform;
+		output.action = derivedAction<Plateform>([](Plateform& plateform, sf::Time) {
+			plateform.inverse();
+		});
+		commands.push(output);
+		Command output2;
+		output2.category = Category::Shadow;
+		output2.action = derivedAction<Shadow>([](Shadow& shadow, sf::Time) {
+			shadow.inverse();
+		});
+		commands.push(output2);
 	}
 }
 
