@@ -75,6 +75,7 @@ bool SceneNode::checkNodeCollision(SceneNode & node)
 	
 	if (this != &node && collision(*this, node))
 	{
+		//std::cout << "collision : " << this->getCategory() << " , " << node.getCategory() << std::endl;
 		return true;
 	}
 
@@ -108,12 +109,16 @@ bool SceneNode::checkSceneCollision(SceneNode & sceneGraph)
 void SceneNode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
+
 	drawCurrent(target, states);
 
 	for (auto &child : children)
 	{
 		child->draw(target, states);
 	}
+
+	//drawBoundingRect(target, states);
+	
 }
 
 void SceneNode::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
@@ -130,6 +135,20 @@ void SceneNode::updateChildren(sf::Time dt)
 	{
 		child->update(dt);
 	}
+}
+
+void SceneNode::drawBoundingRect(sf::RenderTarget& target, sf::RenderStates) const
+{
+	sf::FloatRect rect = getBoundingRect();
+
+	sf::RectangleShape shape;
+	shape.setPosition(sf::Vector2f(rect.left, rect.top));
+	shape.setSize(sf::Vector2f(rect.width, rect.height));
+	shape.setFillColor(sf::Color::Transparent);
+	shape.setOutlineColor(sf::Color::Green);
+	shape.setOutlineThickness(1.f);
+
+	target.draw(shape);
 }
 
 bool collision(const SceneNode & l, const SceneNode & r)

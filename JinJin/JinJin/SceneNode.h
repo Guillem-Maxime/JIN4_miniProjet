@@ -42,6 +42,8 @@ private:
 	virtual void updateCurrent(sf::Time dt);
 	void updateChildren(sf::Time dt);
 
+	void drawBoundingRect(sf::RenderTarget & target, sf::RenderStates) const;
+
 	std::vector<USPtr> children;
 	SceneNode* parent;
 };

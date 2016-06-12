@@ -23,6 +23,8 @@ public:
 
 	CommandQueue& getCommandQueue();
 
+	void reset();
+
 
 private:
 	void loadTextures();
