@@ -21,6 +21,7 @@ unsigned int Player::getCategory() const
 
 sf::FloatRect Player::getBoundingRect() const
 {
+	//on adapte le rectangle de collision pour n'avoir que la partie inferieure
 	sf::FloatRect a = sprite.getGlobalBounds();
 	a.top += a.height*0.75;
 	a.height /= 4;
@@ -39,16 +40,20 @@ void Player::setGrounded(bool g)
 
 void Player::jump(float playerspeed)
 {
+	//si le joueur est au sol et qu'il ne saute pas il peut rentrer dans la phacse saut
 	if (jumpTime == sf::Time::Zero && grounded)
 		jumping = 1;
+	// s'il saute son temps de saut doit être augmenté du temps d'une frame
 	if (jumping)
 		jumpTime += TimePerFrame;
 		
-	if (jumping && jumpTime < sf::seconds(18.f))
+	//tant qu'il saute  sa vitesse augmente
+	if (jumping && jumpTime.asSeconds() < 18.f)
 	{
 		setVelocity(getVelocity() + sf::Vector2f(0.f, -1.5*playerspeed));
 	}
-	if(grounded && jumpTime > sf::seconds(18.f))
+	//il peut re-sauter en arrivant au sol 
+	if(grounded && jumpTime.asSeconds() > 18.f)
 	{
 		jumping = 0;
 		jumpTime = sf::Time::Zero;

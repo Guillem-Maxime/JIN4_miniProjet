@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <iostream>
 
+/* Définition constante du temps d'une frame*/
 const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), world(window), evHandler()
@@ -8,6 +9,7 @@ Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), world(window), evHan
 
 }
 
+/* On s'assure d'avoir un temps constant entre chque frame*/
 void Game::run()
 {
 	sf::Clock clock;
@@ -46,7 +48,6 @@ void Game::processEvents()
 
 void Game::update(sf::Time deltaTime)
 {
-
 	world.update(deltaTime);
 }
 

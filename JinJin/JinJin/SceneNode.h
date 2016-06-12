@@ -10,6 +10,8 @@
 
 #include "Command.h"
 
+/* Classe de base des objets du graphe de scène */
+
 class SceneNode : public sf::Drawable, public sf::Transformable, private sf::NonCopyable
 {
 public:
@@ -48,5 +50,5 @@ private:
 	SceneNode* parent;
 };
 
-
+//renvoie true si les deux noeuds sont en collision
 bool	collision(const SceneNode& l, const SceneNode& r);

@@ -20,6 +20,7 @@ unsigned int Shadow::getCategory() const
 
 sf::FloatRect Shadow::getBoundingRect() const
 {
+	//même remarque que pour les plateformes
 	if (inversed)
 	{
 		sf::FloatRect a = sprite.getGlobalBounds();

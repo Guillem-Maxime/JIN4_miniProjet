@@ -1,5 +1,7 @@
 #pragma once
 #include "SceneNode.h"
+
+/* Gère l'objet s'occupant du background */
 class SpriteNode : public SceneNode
 {
 public:

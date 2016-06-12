@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "SceneNode.h"
 
+/* Classe Mère pour les classes pouvant changer leur position*/
 class Entity : public SceneNode
 {
 public:

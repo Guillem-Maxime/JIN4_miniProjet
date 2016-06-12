@@ -6,8 +6,7 @@
 
 #include <iostream>
 
-
-
+/* Simplification de l'appel à setVelocity */
 struct PlayerMover
 {
 	PlayerMover(float vx, float vy) : velocity(vx,vy){ }
@@ -20,7 +19,7 @@ struct PlayerMover
 	sf::Vector2f velocity;
 };
 
-
+/* Gestion des évenements demandés*/
 void EventHandler::handleEvent(const sf::Event & event, CommandQueue & commands)
 {
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
@@ -32,7 +31,7 @@ void EventHandler::handleEvent(const sf::Event & event, CommandQueue & commands)
 		};
 		commands.push(output);
 	}
-
+	/* Demande aux plateformes de s'inverser (les ombres deviennent materielle et les plateformes non)*/
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
 	{
 		Command output;
@@ -50,11 +49,12 @@ void EventHandler::handleEvent(const sf::Event & event, CommandQueue & commands)
 	}
 }
 
+/* Gestion des evenements de déplacement*/
 void EventHandler::handleRealtimeInput(CommandQueue & commands)
 {
 	const float playerspeed = 10.f;
-
 	
+	/* Saut */
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 	{
 		Command moveUp;
@@ -65,6 +65,7 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 		commands.push(moveUp);
 		
 	}
+	/* Gauche */
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
 		Command moveUp;
@@ -72,6 +73,7 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 		moveUp.action = derivedAction<Player>(PlayerMover(-0.75*playerspeed, 0.f));
 		commands.push(moveUp);
 	}
+	/* Droite */
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		Command moveUp;

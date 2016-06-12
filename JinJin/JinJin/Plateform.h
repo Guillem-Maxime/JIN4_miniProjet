@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "TextureHolder.h"
 
+/* Classe les objets plateforme */
 class Plateform : public Entity
 {
 public:

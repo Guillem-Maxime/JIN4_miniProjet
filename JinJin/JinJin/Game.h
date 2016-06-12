@@ -3,6 +3,7 @@
 #include "World.h"
 #include "EventHandler.h"
 
+/* Boucle de rendu*/
 class Game
 {
 public:

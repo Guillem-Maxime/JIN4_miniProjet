@@ -72,12 +72,9 @@ sf::FloatRect SceneNode::getBoundingRect() const
 
 bool SceneNode::checkNodeCollision(SceneNode & node)
 {
-	
+	//deux plateformes se touchant renvoie true
 	if (this != &node && collision(*this, node))
-	{
-		//std::cout << "collision : " << this->getCategory() << " , " << node.getCategory() << std::endl;
 		return true;
-	}
 
 	for(auto& child : children)
 	{
@@ -95,7 +92,6 @@ bool SceneNode::checkSceneCollision(SceneNode & sceneGraph)
 	if (checkNodeCollision(sceneGraph))
 		return true;
 	
-
 	for	(auto& child : sceneGraph.children)
 	{
 		if (checkSceneCollision(*child))

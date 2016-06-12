@@ -1,6 +1,8 @@
 #pragma once
 #include "Entity.h"
 #include "TextureHolder.h"
+
+ /* Classe des objets ombres plateforme */
 class Shadow : public Entity
 {
 public:

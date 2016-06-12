@@ -86,9 +86,6 @@
     <ClInclude Include="EventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Plateform.h">
       <Filter>Header Files</Filter>
     </ClInclude>

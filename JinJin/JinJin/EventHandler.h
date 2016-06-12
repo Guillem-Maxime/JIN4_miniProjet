@@ -5,6 +5,7 @@
 
 class CommandQueue;
 
+/* Classe de gestion des évenements (inputs ou évenements provoqués) */
 class EventHandler
 {
 public:

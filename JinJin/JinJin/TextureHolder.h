@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
+/* Objet contenant toutes les textures */
 namespace Textures
 {
 	enum ID
@@ -23,5 +24,6 @@ public:
 	const sf::Texture& get(Textures::ID id) const;
 	
 	Textures::ID toTextureID(char c);
+	//utiles ?
 };
 

@@ -14,6 +14,8 @@
 #include <array>
 #include <memory>
 
+/* Gère l'initialisation et la mise à jour du jeu */
+
 class World : public sf::NonCopyable
 {
 public:
@@ -53,8 +55,6 @@ private:
 	CommandQueue comQueue;
 
 	bool grounded;
-	
-
 
 };
 

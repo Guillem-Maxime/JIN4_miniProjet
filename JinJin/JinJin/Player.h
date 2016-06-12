@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "TextureHolder.h"
 
+/* Classe de l'objet joueur (son entité) */
 class Player : public Entity
 {
 public:

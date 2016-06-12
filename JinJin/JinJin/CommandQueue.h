@@ -3,6 +3,7 @@
 #include "Command.h"
 #include <queue>
 
+/* File contenant les commandes à effectuer pour cet update*/
 class CommandQueue
 {
 public:
