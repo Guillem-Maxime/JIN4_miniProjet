@@ -4,6 +4,7 @@
 #include "SceneNode.h"
 #include "Player.h"
 #include "Plateform.h"
+#include "Shadow.h"
 #include "SpriteNode.h"
 #include "CommandQueue.h"
 #include "Command.h"

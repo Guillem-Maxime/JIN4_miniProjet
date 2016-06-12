@@ -81,6 +81,7 @@
     <ClCompile Include="Plateform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneNode.cpp" />
+    <ClCompile Include="Shadow.cpp" />
     <ClCompile Include="SpriteNode.cpp" />
     <ClCompile Include="TextureHolder.cpp" />
     <ClCompile Include="World.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="Plateform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneNode.h" />
+    <ClInclude Include="Shadow.h" />
     <ClInclude Include="SpriteNode.h" />
     <ClInclude Include="TextureHolder.h" />
     <ClInclude Include="World.h" />

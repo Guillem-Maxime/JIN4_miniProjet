@@ -71,6 +71,7 @@ void World::loadTextures()
 {
 	textures.load(Textures::Player, "Media/Sprites/1.png");
 	textures.load(Textures::Platform, "Media/Sprites/2.png");
+	textures.load(Textures::Shadow, "Media/Sprites/3.png");
 	textures.load(Textures::Background, "Media/Tiles/1.jpg");
 }
 
@@ -92,11 +93,6 @@ void World::buildScene()
 	backSprite->setPosition(worldBounds.left, worldBounds.top);
 	sceneLayers[Back]->attachChild(std::move(backSprite));
 
-	std::unique_ptr<Player> mainChar = std::make_unique<Player>(textures);
-	player = mainChar.get();
-	player->setPosition(spawnPosition);
-	player->setVelocity(0.f, 0.f);
-	sceneLayers[Front]->attachChild(std::move(mainChar));
 
 	std::vector<sf::Vector2f> pos;
 	pos.push_back(sf::Vector2f(400, 400));
@@ -112,10 +108,19 @@ void World::buildScene()
 	{
 		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures);
 		p->setPosition(position);
+
+		std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures);
+		s->setPosition(sf::Vector2f(70, 50));
+
+		p->attachChild(std::move(s));
 		sceneLayers[Front]->attachChild(std::move(p));
-		
 	}
 
+	std::unique_ptr<Player> mainChar = std::make_unique<Player>(textures);
+	player = mainChar.get();
+	player->setPosition(spawnPosition);
+	player->setVelocity(0.f, 0.f);
+	sceneLayers[Front]->attachChild(std::move(mainChar));
 	
 
 

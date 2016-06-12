@@ -44,11 +44,11 @@ void Player::jump(float playerspeed)
 	if (jumping)
 		jumpTime += TimePerFrame;
 		
-	if (jumping && jumpTime < sf::seconds(15.f))
+	if (jumping && jumpTime < sf::seconds(18.f))
 	{
 		setVelocity(getVelocity() + sf::Vector2f(0.f, -1.5*playerspeed));
 	}
-	if(grounded && jumpTime > sf::seconds(15.f))
+	if(grounded && jumpTime > sf::seconds(18.f))
 	{
 		jumping = 0;
 		jumpTime = sf::Time::Zero;

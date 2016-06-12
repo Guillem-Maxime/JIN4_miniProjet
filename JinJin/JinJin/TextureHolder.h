@@ -8,7 +8,7 @@ namespace Textures
 {
 	enum ID
 	{
-		Background, Player, Platform, Lamp
+		Background, Player, Platform, Shadow, Lamp
 	};
 }
 
