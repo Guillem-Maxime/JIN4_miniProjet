@@ -38,7 +38,7 @@ private:
 	{
 		Back, 
 		Front, 
-		//Text, 
+		Text, 
 		LayerCount
 	};
 	
