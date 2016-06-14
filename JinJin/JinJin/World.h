@@ -8,6 +8,7 @@
 #include "SpriteNode.h"
 #include "CommandQueue.h"
 #include "Command.h"
+#include "Textbox.h"
 
 #include <SFML\Graphics.hpp>
 

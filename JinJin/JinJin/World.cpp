@@ -145,6 +145,13 @@ void World::buildScene()
 	player->setVelocity(0.f, 0.f);
 	sceneLayers[Front]->attachChild(std::move(mainChar));
 	
+	//On crée une textBox
+	sf::Font font;
+	if (!font.loadFromFile("game_over.ttf")){
+		std::cout << "erreur loadfromfile font" << std::endl;
+	}
+	std::unique_ptr<TextBox> textTB = std::make_unique<TextBox>("Hello World", font, sf::Vector2f(40, 40), spawnPosition);
+	sceneLayers[Front]->attachChild(std::move(textTB));
 
 
 }
