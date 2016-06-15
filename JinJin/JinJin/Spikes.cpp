@@ -11,10 +11,12 @@ void Spikes::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) con
 	target.draw(sprite, states);
 }
 
+unsigned int Spikes::getCategory() const
+{
+	return Category::None;
+}
+
 sf::FloatRect Spikes::getBoundingRect() const
 {
-	//on adapte le rectangle de colision pour n'avoir que le bord superieur
-	sf::FloatRect a = sprite.getGlobalBounds();
-	a.height /= 10;
-	return getWorldTransform().transformRect(a);
+	return sf::FloatRect();
 }

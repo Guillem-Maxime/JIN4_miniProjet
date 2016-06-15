@@ -84,7 +84,6 @@ bool SceneNode::checkNodeCollision(SceneNode & node)
 
 		}
 	}
-	
 
 	return false;
 

@@ -277,7 +277,11 @@ void World::buildLevel() {
 	posPF3.push_back(sf::Vector2f(4750, 550));
 	posSh3.push_back(sf::Vector2f(4850, 535));
 
-
+	for(int i= 3050; i<5000; i+= 72)
+	{
+		posSpikes.push_back(sf::Vector2f(i, 1600));
+	}
+	
 
 	//On cree le level
 	//On cree les ombres en premier pour qu'elles soient en dessous
