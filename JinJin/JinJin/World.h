@@ -10,6 +10,8 @@
 #include "Command.h"
 #include "Textbox.h"
 #include "EventHandler.h"
+#include "Lamps.h"
+#include "Spikes.h"
 
 #include <SFML\Graphics.hpp>
 

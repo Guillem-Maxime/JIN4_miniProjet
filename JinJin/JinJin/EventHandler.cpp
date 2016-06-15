@@ -76,7 +76,7 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 		Command moveUp;
 		moveUp.category = Category::Player;
 		moveUp.action = derivedAction<Player>([playerspeed](Player& player, sf::Time) {
-			player.setVelocity(player.getVelocity() + sf::Vector2f(-0.75*playerspeed,0.f));
+			player.setVelocity(player.getVelocity() + sf::Vector2f(float(-0.75)*playerspeed,0));
 			if(!player.getJumping())
 				player.changeRect(sf::IntRect(0, 124, 120, 136));
 		});
@@ -88,7 +88,7 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 		Command moveUp;
 		moveUp.category = Category::Player;
 		moveUp.action = derivedAction<Player>([playerspeed](Player& player, sf::Time) {
-			player.setVelocity(player.getVelocity() + sf::Vector2f(0.75*playerspeed, 0.f));
+			player.setVelocity(player.getVelocity() + sf::Vector2f(float(0.75)*playerspeed, 0));
 			if (!player.getJumping())
 				player.changeRect(sf::IntRect(314, 124, 117, 136));
 		});

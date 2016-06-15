@@ -11,6 +11,8 @@ void Lamps::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) cons
 	target.draw(sprite, states);
 }
 
+/*
 unsigned int Lamps::getCategory() const
 {
 }
+*/

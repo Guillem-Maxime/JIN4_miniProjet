@@ -112,6 +112,9 @@ void World::loadTextures()
 
 	textures.load(Textures::Floor, "Media/Sprites/Floor.png");
 	textures.load(Textures::Wall, "Media/Sprites/Wall.png");
+
+	textures.load(Textures::Lamp, "Media/Sprites/Lamp.png");
+	textures.load(Textures::Spike, "Media/Sprites/Spike.png");
 }
 
 void World::buildScene()
@@ -138,23 +141,6 @@ void World::buildScene()
 
 	buildLevel();
 
-	//on crée les ombres puis la plateforme associée
-	/*
-	for (auto position : pos)
-	{
-		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1);
-		/*float a = -30.f * 0.003*position.x;
-		p->setPosition(sf::Vector2f(a, -20));*/
-		
-		/*std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures);
-		s->setPosition(position);
-
-		//s->attachChild(std::move(p));
-		p->setPosition(position);
-		sceneLayers[Front]->attachChild(std::move(p));
-	}
-	*/
-
 	//On crée le personnage
 	std::unique_ptr<Player> mainChar = std::make_unique<Player>(textures);
 	player = mainChar.get();
@@ -176,7 +162,7 @@ void World::buildScene()
 
 void World::buildLevel() {
 
-	//Nos trois conteneur de plateforme : Plateforme1, 2 et 3 et Shadow1, 2 et 3
+	//Nos trois conteneur de plateforme : Plateforme1, 2 et 3 et Shadow1, 2 et 3, Lampes et Piques
 	std::vector<sf::Vector2f> posPF1;
 	std::vector<sf::Vector2f> posPF2;
 	std::vector<sf::Vector2f> posPF3;
@@ -184,6 +170,9 @@ void World::buildLevel() {
 	std::vector<sf::Vector2f> posSh1;
 	std::vector<sf::Vector2f> posSh2;
 	std::vector<sf::Vector2f> posSh3;
+
+	std::vector<sf::Vector2f> posLamps;
+	std::vector<sf::Vector2f> posSpikes;
 
 	//On dessine le bord du niveau
 	//Le sol
@@ -265,6 +254,7 @@ void World::buildLevel() {
 
 
 	//Les trois petites plateformes
+	posLamps.push_back(sf::Vector2f(4650, 550));
 	posPF3.push_back(sf::Vector2f(4550, 550));
 	posSh3.push_back(sf::Vector2f(4350, 535));
 	posPF3.push_back(sf::Vector2f(4650, 600));
@@ -312,7 +302,18 @@ void World::buildLevel() {
 		sceneLayers[Front]->attachChild(std::move(p));
 	}
 
+	//Puis les lampes et les piques
+	for (auto position : posLamps) {
+		std::unique_ptr<Lamps> l = std::make_unique<Lamps>(textures);
+		l->setPosition(sf::Vector2f(position));
+		sceneLayers[Front]->attachChild(std::move(l));
+	}
 
+	for (auto position : posSpikes) {
+		std::unique_ptr<Spikes> s = std::make_unique<Spikes>(textures);
+		s->setPosition(sf::Vector2f(position));
+		sceneLayers[Front]->attachChild(std::move(s));
+	}
 
 
 }

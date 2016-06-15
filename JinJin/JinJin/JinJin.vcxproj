@@ -136,11 +136,13 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Lamps.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plateform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Shadow.cpp" />
+    <ClCompile Include="Spikes.cpp" />
     <ClCompile Include="SpriteNode.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="TextureHolder.cpp" />
@@ -152,10 +154,12 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Lamps.h" />
     <ClInclude Include="Plateform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="Shadow.h" />
+    <ClInclude Include="Spikes.h" />
     <ClInclude Include="SpriteNode.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="TextureHolder.h" />
