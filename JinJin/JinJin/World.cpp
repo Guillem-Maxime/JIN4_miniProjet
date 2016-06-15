@@ -4,14 +4,10 @@
 
 
 /* Initialisation */
-<<<<<<< HEAD
-World::World(sf::RenderWindow & window) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
-, spawnPosition(240, 1570)
-=======
+
 World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
 , evHandler(handler)
 , spawnPosition(200, 400)
->>>>>>> 5b8e44ca8d725b44aea9f231d5032c9bff3f7479
 ,player(nullptr), grounded(false)
 {
 	loadTextures();
@@ -101,7 +97,7 @@ void World::reset()
 
 void World::loadTextures()
 {
-	textures.load(Textures::Player, "Media/Sprites/idle.png");
+	textures.load(Textures::Player, "Media/Sprites/sheet.png");
 	textures.load(Textures::Platform1, "Media/Sprites/Platform1.png");
 	textures.load(Textures::Platform2, "Media/Sprites/Platform2.png");
 	textures.load(Textures::Platform3, "Media/Sprites/Platform3.png");
@@ -154,9 +150,6 @@ void World::buildScene()
 	pos.push_back(sf::Vector2f(1300, 1305));
 	pos.push_back(sf::Vector2f(1433, 1433));
 	*/
-=======
-	
->>>>>>> 5b8e44ca8d725b44aea9f231d5032c9bff3f7479
 
 	//on crée les ombres puis la plateforme associée
 	/*
