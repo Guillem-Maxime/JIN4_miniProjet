@@ -13,7 +13,7 @@ public:
 	void handleEvent(const sf::Event& event, CommandQueue& commands);
 	void handleRealtimeInput(CommandQueue& commands);
 
-	void addDrawText();
+	void addDrawText(const sf::String str);
 
 private:
 	bool jumping;
@@ -23,6 +23,6 @@ private:
 	sf::Time jumpTime;
 
 	sf::Time textTime;
-
+	sf::String textString;
 };
 

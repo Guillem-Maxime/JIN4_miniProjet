@@ -3,10 +3,10 @@
 
 class TextBox : public SceneNode {
 public:
-	TextBox(const sf::String &str, const sf::Font &f, const sf::Vector2f v, const sf::Vector2f origin);
+	TextBox(const sf::Font &f, sf::Color color);
 	void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
 
-	void displayText(sf::String str, sf::Vector2f pos);
+	void displayText(sf::String str);
 
 	unsigned int getCategory() const;
 

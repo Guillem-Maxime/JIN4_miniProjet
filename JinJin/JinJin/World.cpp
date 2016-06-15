@@ -4,8 +4,14 @@
 
 
 /* Initialisation */
+<<<<<<< HEAD
 World::World(sf::RenderWindow & window) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
 , spawnPosition(240, 1570)
+=======
+World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
+, evHandler(handler)
+, spawnPosition(200, 400)
+>>>>>>> 5b8e44ca8d725b44aea9f231d5032c9bff3f7479
 ,player(nullptr), grounded(false)
 {
 	loadTextures();
@@ -54,7 +60,7 @@ void World::update(sf::Time dt)
 	//Si le joueur tombe trop bas, il recommence
 	if (player->getPosition().y > 1700)
 	{
-		
+		evHandler.addDrawText("lol");
 		reset();
 
 	}
@@ -71,6 +77,7 @@ void World::update(sf::Time dt)
 	center.y = std::max(center.y, 0.f + borderDistance);
 
 	worldView.setCenter(center);
+	text->setPosition(player->getPosition());
 
 }
 
@@ -136,6 +143,7 @@ void World::buildScene()
 	pos.push_back(sf::Vector2f(700, 400));
 	pos.push_back(sf::Vector2f(800, 410));
 	pos.push_back(sf::Vector2f(1000, 400));
+<<<<<<< HEAD
 	pos.push_back(sf::Vector2f(600, 600));
 	pos.push_back(sf::Vector2f(700, 735));
 	pos.push_back(sf::Vector2f(800, 835));
@@ -146,6 +154,9 @@ void World::buildScene()
 	pos.push_back(sf::Vector2f(1300, 1305));
 	pos.push_back(sf::Vector2f(1433, 1433));
 	*/
+=======
+	
+>>>>>>> 5b8e44ca8d725b44aea9f231d5032c9bff3f7479
 
 	//on crée les ombres puis la plateforme associée
 	/*
@@ -173,10 +184,12 @@ void World::buildScene()
 	
 	//On crée une textBox
 	sf::Font font;
-	if (!font.loadFromFile("game_over.ttf")){
+	if (!font.loadFromFile("Neon.ttf")){
 		std::cout << "erreur loadfromfile font" << std::endl;
 	}
-	std::unique_ptr<TextBox> textTB = std::make_unique<TextBox>("LOL", font, sf::Vector2f(400, 400), spawnPosition);
+	std::unique_ptr<TextBox> textTB = std::make_unique<TextBox>(font, sf::Color(255, 140, 0));
+	text = textTB.get();
+
 	sceneLayers[Text]->attachChild(std::move(textTB));
 
 
