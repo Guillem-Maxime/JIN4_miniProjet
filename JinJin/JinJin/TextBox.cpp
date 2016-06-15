@@ -15,7 +15,6 @@ void TextBox::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) co
 
 	if (draw)
 	{
-		//target.draw(box, states);
 		target.draw(text, states);
 
 	}

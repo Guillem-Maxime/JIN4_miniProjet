@@ -18,15 +18,7 @@ EventHandler::EventHandler() : jumping(false), displaying(false), inversed(false
 /* Gestion des évenements demandés*/
 void EventHandler::handleEvent(const sf::Event & event, CommandQueue & commands)
 {
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
-	{
-		Command output;
-		output.category = Category::Player;
-		output.action = [](SceneNode& s, sf::Time){
-			std::cout << s.getPosition().x << "," << s.getPosition().y << std::endl;
-		};
-		commands.push(output);
-	}
+	//pas d'évenements dans notre jeu
 }
 
 /* Gestion des evenements de déplacement*/

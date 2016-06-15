@@ -27,13 +27,3 @@ const sf::Texture & TextureHolder::get(Textures::ID id) const
 	return *found->second;
 }
 
-Textures::ID TextureHolder::toTextureID(char c)
-{
-	switch (c)
-	{
-	case 'b':
-		return Textures::Background;
-	case 'p':
-		return Textures::Player;
-	}
-}

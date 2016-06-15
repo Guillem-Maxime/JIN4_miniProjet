@@ -1,12 +1,5 @@
 #include "Plateform.h"
 
-//Le type indique le type de texture à charger : 
-/* 1: Plateforme horizontale
- * 2: Plateforme verticale
- * 3: Petite Plateforme
- * 4: Sol
- * 5: Murs
- */
 Plateform::Plateform(const TextureHolder & textures, int type) : inversed(false)
 {
 	switch (type) {

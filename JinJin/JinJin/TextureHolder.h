@@ -23,7 +23,5 @@ public:
 	sf::Texture& get(Textures::ID id);
 	const sf::Texture& get(Textures::ID id) const;
 	
-	Textures::ID toTextureID(char c);
-	//utiles ?
 };
 
