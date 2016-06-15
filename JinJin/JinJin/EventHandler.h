@@ -13,7 +13,7 @@ public:
 	void handleEvent(const sf::Event& event, CommandQueue& commands);
 	void handleRealtimeInput(CommandQueue& commands);
 
-	void addDrawText(const sf::String str);
+	void addDrawText(const sf::String str, int size);
 
 	void addInverse();
 
@@ -28,5 +28,6 @@ private:
 
 	sf::Time textTime;
 	sf::String textString;
+	int textSize;
 };
 

@@ -64,6 +64,7 @@ private:
 	bool grounded;
 	bool inversed;
 
+	int deathCount;
 
 	EventHandler& evHandler;
 
