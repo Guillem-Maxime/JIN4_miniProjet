@@ -6,11 +6,18 @@ Player::Player(const TextureHolder & textures) : sprite(textures.get(Textures::P
 {
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+
+	sprite.setTextureRect(sf::IntRect(157, 119, 86, 141));
 }
 
 void Player::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(sprite, states);
+}
+
+void Player::changeRect(sf::IntRect rect)
+{
+	sprite.setTextureRect(rect);
 }
 
 unsigned int Player::getCategory() const
@@ -52,5 +59,5 @@ void Player::jump(float playerspeed)
 	if (grounded)
 		jumping = true;
 	if(jumping)
-		setVelocity(getVelocity() + sf::Vector2f(0.f, -2.f*playerspeed));
+		setVelocity(getVelocity() + sf::Vector2f(0.f, -playerspeed));
 }

@@ -4,9 +4,17 @@
 
 
 /* Initialisation */
+<<<<<<< HEAD
 World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
 , spawnPosition(240, 1570)
 ,player(nullptr), grounded(false), evHandler(handler)
+=======
+
+World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
+, evHandler(handler)
+, spawnPosition(200, 400)
+,player(nullptr), grounded(false)
+>>>>>>> 6327010afd1e27ba76310f93763f6ce6d342f477
 {
 	loadTextures();
 	buildScene();
@@ -95,7 +103,7 @@ void World::reset()
 
 void World::loadTextures()
 {
-	textures.load(Textures::Player, "Media/Sprites/character.png");
+	textures.load(Textures::Player, "Media/Sprites/sheet.png");
 	textures.load(Textures::Platform1, "Media/Sprites/Platform1.png");
 	textures.load(Textures::Platform2, "Media/Sprites/Platform2.png");
 	textures.load(Textures::Platform3, "Media/Sprites/Platform3.png");

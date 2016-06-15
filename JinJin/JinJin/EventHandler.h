@@ -15,10 +15,14 @@ public:
 
 	void addDrawText(const sf::String str);
 
+	void addInverse();
+
 private:
 	bool jumping;
 
 	bool displaying;
+
+	bool inversed;
 
 	sf::Time jumpTime;
 
