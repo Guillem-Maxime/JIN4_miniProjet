@@ -95,6 +95,7 @@ void World::update(sf::Time dt)
 	if (player->getPosition().x > 5350 && player->getPosition().y < 650) {
 		inversed = false;
 		evHandler.addDrawText("You've beaten the game", 200);
+		evHandler.addInverse();
 		player->setVelocity(sf::Vector2f(0,0));
 	}
 
