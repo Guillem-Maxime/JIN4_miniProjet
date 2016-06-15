@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
-const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
+const sf::Time TimePerFrame = sf::seconds(1.f / 30.f);
 
 Player::Player(const TextureHolder & textures) : sprite(textures.get(Textures::Player)), grounded(false)
 {
@@ -48,12 +48,12 @@ void Player::jump(float playerspeed)
 		jumpTime += TimePerFrame;
 		
 	//tant qu'il saute  sa vitesse augmente
-	if (jumping && jumpTime.asSeconds() < 18.f)
+	if (jumping && jumpTime.asSeconds() < 1.f)
 	{
-		setVelocity(getVelocity() + sf::Vector2f(0.f, -1.5*playerspeed));
+		setVelocity(getVelocity() + sf::Vector2f(0.f, -2*playerspeed));
 	}
 	//il peut re-sauter en arrivant au sol 
-	if(grounded && jumpTime.asSeconds() > 18.f)
+	if(grounded && jumpTime.asSeconds() > 1.f)
 	{
 		jumping = 0;
 		jumpTime = sf::Time::Zero;

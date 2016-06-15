@@ -12,6 +12,8 @@ World::World(sf::RenderWindow & window) : window(window), worldView(window.getDe
 	buildScene();
 
 	worldView.setCenter(spawnPosition);
+
+	window.setFramerateLimit(30);
 }
 
 void World::update(sf::Time dt)
@@ -151,7 +153,7 @@ void World::buildScene()
 		std::cout << "erreur loadfromfile font" << std::endl;
 	}
 	std::unique_ptr<TextBox> textTB = std::make_unique<TextBox>("Hello World", font, sf::Vector2f(40, 40), spawnPosition);
-	sceneLayers[Front]->attachChild(std::move(textTB));
+	sceneLayers[Text]->attachChild(std::move(textTB));
 
 
 }
