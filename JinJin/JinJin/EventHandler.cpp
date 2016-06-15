@@ -87,7 +87,7 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 	{
-		//si le joueur est au sol et qu'il ne saute pas il peut rentrer dans la phacse saut
+		//si le joueur est au sol et qu'il ne saute pas il peut rentrer dans la phase saut
 		if (!jumping)
 		{
 			jumping = true;

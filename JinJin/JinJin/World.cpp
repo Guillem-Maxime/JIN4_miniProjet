@@ -4,13 +4,19 @@
 
 
 /* Initialisation */
+<<<<<<< HEAD
+World::World(sf::RenderWindow & window) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
+, spawnPosition(240, 1570)
+=======
 World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
 , evHandler(handler)
 , spawnPosition(200, 400)
+>>>>>>> 5b8e44ca8d725b44aea9f231d5032c9bff3f7479
 ,player(nullptr), grounded(false)
 {
 	loadTextures();
 	buildScene();
+	buildLevel();
 
 	worldView.setCenter(spawnPosition);
 
@@ -126,6 +132,7 @@ void World::buildScene()
 
 	//création des plateformes
 	//Positions voulue pour les ombres
+	/*
 	std::vector<sf::Vector2f> pos;
 	pos.push_back(sf::Vector2f(200, 845));
 	pos.push_back(sf::Vector2f(350, 700));
@@ -136,9 +143,23 @@ void World::buildScene()
 	pos.push_back(sf::Vector2f(700, 400));
 	pos.push_back(sf::Vector2f(800, 410));
 	pos.push_back(sf::Vector2f(1000, 400));
+<<<<<<< HEAD
+	pos.push_back(sf::Vector2f(600, 600));
+	pos.push_back(sf::Vector2f(700, 735));
+	pos.push_back(sf::Vector2f(800, 835));
+	pos.push_back(sf::Vector2f(900, 935));
+	pos.push_back(sf::Vector2f(1000, 1035));
+	pos.push_back(sf::Vector2f(1100, 1135));
+	pos.push_back(sf::Vector2f(1200, 1235));
+	pos.push_back(sf::Vector2f(1300, 1305));
+	pos.push_back(sf::Vector2f(1433, 1433));
+	*/
+=======
 	
+>>>>>>> 5b8e44ca8d725b44aea9f231d5032c9bff3f7479
 
 	//on crée les ombres puis la plateforme associée
+	/*
 	for (auto position : pos)
 	{
 		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1);
@@ -146,12 +167,13 @@ void World::buildScene()
 		p->setPosition(sf::Vector2f(a, -20));*/
 		
 		/*std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures);
-		s->setPosition(position);*/
+		s->setPosition(position);
 
 		//s->attachChild(std::move(p));
 		p->setPosition(position);
 		sceneLayers[Front]->attachChild(std::move(p));
 	}
+	*/
 
 	//On crée le personnage
 	std::unique_ptr<Player> mainChar = std::make_unique<Player>(textures);
@@ -173,5 +195,71 @@ void World::buildScene()
 
 }
 
+void World::buildLevel() {
+
+	//Nos trois conteneur de plateforme : PF1, PF2 et PF3
+	std::vector<sf::Vector2f> posPF1;
+	std::vector<sf::Vector2f> posPF2;
+	std::vector<sf::Vector2f> posPF3;
+
+	//On dessine le bord du niveau
+	//D'abord le bas et le haut
+	for (int i = 0; i < 30; ++i) {
+		posPF1.push_back(sf::Vector2f(float(i * 240 + 215), 1675));
+		posPF1.push_back(sf::Vector2f(float(i * 240 + 215), 905));
+	}
 
 
+	//Puis la gauche et la droite
+	for (int i = 0; i < 5; ++i) {
+		posPF2.push_back(sf::Vector2f(130, float(i * 140 + 1010)));
+		posPF2.push_back(sf::Vector2f(7050, float(i * 140 + 1010)));
+	}
+
+	//Le premier module
+	posPF2.push_back(sf::Vector2f(535, 1430));
+	posPF2.push_back(sf::Vector2f(535, 1570));
+	posPF3.push_back(sf::Vector2f(460, 1500));
+	posPF1.push_back(sf::Vector2f(645, 1395));
+	posPF1.push_back(sf::Vector2f(885, 1395));
+	posPF2.push_back(sf::Vector2f(1005, 1430));
+	posPF2.push_back(sf::Vector2f(1005, 1570));
+	posPF3.push_back(sf::Vector2f(1075, 1500));
+
+	//La longue plateforme seule
+	posPF1.push_back(sf::Vector2f(1300, 1395));
+	
+	//Les trois petites plateformes seules
+	posPF3.push_back(sf::Vector2f(1550, 1430));
+	posPF3.push_back(sf::Vector2f(1790, 1480));
+	posPF3.push_back(sf::Vector2f(2030, 1390));
+
+	//Le deuxième module
+	posPF2.push_back(sf::Vector2f(2255, 1570));
+	posPF2.push_back(sf::Vector2f(2255, 1430));
+	posPF1.push_back(sf::Vector2f(2340, 1325));
+	posPF1.push_back(sf::Vector2f(2580, 1325));
+	posPF2.push_back(sf::Vector2f(2665, 1570));
+	posPF2.push_back(sf::Vector2f(2665, 1430));
+
+	//a partir de là il a les ombres
+
+	//On cree le level
+	for (auto position : posPF1) {
+		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1);
+		p->setPosition(sf::Vector2f(position));
+		sceneLayers[Front]->attachChild(std::move(p));
+	}
+
+	for (auto position : posPF2) {
+		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 2);
+		p->setPosition(sf::Vector2f(position));
+		sceneLayers[Front]->attachChild(std::move(p));
+	}
+
+	for (auto position : posPF3) {
+		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 3);
+		p->setPosition(sf::Vector2f(position));
+		sceneLayers[Front]->attachChild(std::move(p));
+	}
+}

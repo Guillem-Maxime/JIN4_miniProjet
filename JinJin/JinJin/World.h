@@ -34,6 +34,8 @@ private:
 	void loadTextures();
 	void buildScene();
 
+	void buildLevel();
+
 
 	enum Layer
 	{
