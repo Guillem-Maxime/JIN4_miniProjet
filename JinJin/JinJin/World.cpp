@@ -74,6 +74,10 @@ void World::update(sf::Time dt)
 	worldView.setCenter(center);
 	text->setPosition(player->getPosition());
 
+	if (player->getPosition().x > 3200) {
+		evHandler.addInverse();
+	}
+
 }
 
 void World::draw()
@@ -227,10 +231,6 @@ void World::buildLevel() {
 	posPF2.push_back(sf::Vector2f(2965, 1570));
 	posPF2.push_back(sf::Vector2f(2965, 1430));
 
-	if (player->getPosition().x == 3100) {
-		evHandler.addInverse();
-	}
-
 	//a partir de là il y a les ombres
 	posPF1.push_back(sf::Vector2f(3375, 1325));
 	posSh1.push_back(sf::Vector2f(3425, 1300));
@@ -244,12 +244,19 @@ void World::buildLevel() {
 	posPF3.push_back(sf::Vector2f(3800, 950));
 	posSh3.push_back(sf::Vector2f(3865, 900));
 	
-	posPF1.push_back(sf::Vector2f(4200, 700));
-	posSh1.push_back(sf::Vector2f(4305, 650));
+	posPF1.push_back(sf::Vector2f(4100, 800));
+	posSh1.push_back(sf::Vector2f(4205, 750));
 
 
 	//Les quatres petites plateformes
-
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
 
 
 	//On cree le level
