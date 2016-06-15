@@ -92,7 +92,7 @@ void World::update(sf::Time dt)
 		inversed = true;
 	}
 	
-	if (player->getPosition().x > 5350 && player->getPosition().y < 650) {
+	if (inversed && player->getPosition().x > 5350 && player->getPosition().y < 650) {
 		inversed = false;
 		evHandler.addDrawText("You've beaten the game", 200);
 		evHandler.addInverse();
@@ -193,25 +193,9 @@ void World::buildLevel() {
 	std::vector<sf::Vector2f> posSh3;
 
 	std::vector<sf::Vector2f> posLamps;
-	std::vector<sf::Vector2f> posSpikes;
 
-	//On dessine le bord du niveau
-	//Le sol
-	std::unique_ptr<Plateform> pFloor = std::make_unique<Plateform>(textures, 4);
-	pFloor->setPosition(sf::Vector2f(3707.5, 1675));
-	sceneLayers[Front]->attachChild(std::move(pFloor));
 
-	//Les murs
-	std::unique_ptr<Plateform> pWall1 = std::make_unique<Plateform>(textures, 5);
-	pWall1->setPosition(sf::Vector2f(142, 1290));
-	sceneLayers[Front]->attachChild(std::move(pWall1));
-	pWall1 = std::make_unique<Plateform>(textures, 5);
-	pWall1->setPosition(sf::Vector2f(142, 890));
-	sceneLayers[Front]->attachChild(std::move(pWall1));
 
-	std::unique_ptr<Plateform> pWall2 = std::make_unique<Plateform>(textures, 5);
-	pWall2->setPosition(sf::Vector2f(7280, 1290));
-	sceneLayers[Front]->attachChild(std::move(pWall2));
 
 
 	//Le premier module
@@ -342,15 +326,26 @@ void World::buildLevel() {
 		sceneLayers[Front]->attachChild(std::move(l));
 	}
 
+	//On dessine le bord du niveau
+	//Le sol
+	std::unique_ptr<Plateform> pFloor = std::make_unique<Plateform>(textures, 4);
+	pFloor->setPosition(sf::Vector2f(3707.5, 1675));
+	sceneLayers[Front]->attachChild(std::move(pFloor));
+
+	//Les murs
+	std::unique_ptr<Plateform> pWall1 = std::make_unique<Plateform>(textures, 5);
+	pWall1->setPosition(sf::Vector2f(142, 1290));
+	sceneLayers[Front]->attachChild(std::move(pWall1));
+	pWall1 = std::make_unique<Plateform>(textures, 5);
+	pWall1->setPosition(sf::Vector2f(142, 890));
+	sceneLayers[Front]->attachChild(std::move(pWall1));
+
+	std::unique_ptr<Plateform> pWall2 = std::make_unique<Plateform>(textures, 5);
+	pWall2->setPosition(sf::Vector2f(7280, 1290));
+	sceneLayers[Front]->attachChild(std::move(pWall2));
+
 	sf::Texture& texture = textures.get(Textures::Spike);
 	sf::IntRect textureRect(sf::IntRect(0,0,3000,76));
 	texture.setRepeated(true);
-
-	for (auto position : posSpikes) {
-		std::unique_ptr<Spikes> s = std::make_unique<Spikes>(texture, textureRect);
-		s->setPosition(sf::Vector2f(position));
-		sceneLayers[Front]->attachChild(std::move(s));
-	}
-
 
 }
