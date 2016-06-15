@@ -296,6 +296,8 @@ void World::buildLevel() {
 	posPF1.push_back(sf::Vector2f(5450, 650));
 	posSh1.push_back(sf::Vector2f(5450, 700));
 
+
+	posSpikes.push_back(sf::Vector2f(3080, 1570));
 	//On cree le level
 	//On cree les ombres en premier pour qu'elles soient en dessous
 	for (auto position : posSh1) {
@@ -342,7 +344,7 @@ void World::buildLevel() {
 	}
 
 	sf::Texture& texture = textures.get(Textures::Spike);
-	sf::IntRect textureRect(sf::IntRect(0,0,3000,76));
+	sf::IntRect textureRect(sf::IntRect(0,0,4000,76));
 	texture.setRepeated(true);
 
 	for (auto position : posSpikes) {
