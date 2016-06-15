@@ -9,6 +9,7 @@
 #include "CommandQueue.h"
 #include "Command.h"
 #include "Textbox.h"
+#include "EventHandler.h"
 
 #include <SFML\Graphics.hpp>
 
@@ -32,6 +33,8 @@ public:
 private:
 	void loadTextures();
 	void buildScene();
+
+	void buildLevel();
 
 
 	enum Layer
