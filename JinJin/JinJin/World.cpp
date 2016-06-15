@@ -284,6 +284,7 @@ void World::buildLevel() {
 	//Les trois petites plateformes
 	posLamps.push_back(sf::Vector2f(4750, 550));
 	posPF3.push_back(sf::Vector2f(4650, 600));
+
 	posSh3.push_back(sf::Vector2f(4450, 580));
 	posPF3.push_back(sf::Vector2f(4750, 650));
 	posSh3.push_back(sf::Vector2f(4750, 750));
@@ -341,8 +342,12 @@ void World::buildLevel() {
 		sceneLayers[Front]->attachChild(std::move(l));
 	}
 
+	sf::Texture& texture = textures.get(Textures::Spike);
+	sf::IntRect textureRect(sf::IntRect(0,0,3000,76));
+	texture.setRepeated(true);
+
 	for (auto position : posSpikes) {
-		std::unique_ptr<Spikes> s = std::make_unique<Spikes>(textures);
+		std::unique_ptr<Spikes> s = std::make_unique<Spikes>(texture, textureRect);
 		s->setPosition(sf::Vector2f(position));
 		sceneLayers[Front]->attachChild(std::move(s));
 	}

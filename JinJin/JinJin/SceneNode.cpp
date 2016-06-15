@@ -84,7 +84,6 @@ bool SceneNode::checkNodeCollision(SceneNode & node)
 
 		}
 	}
-	
 
 	return false;
 
@@ -97,6 +96,7 @@ bool SceneNode::checkSceneCollision(SceneNode & sceneGraph)
 	
 	for	(auto& child : sceneGraph.children)
 	{
+
 		if (checkSceneCollision(*child))
 			return true;
 	}
