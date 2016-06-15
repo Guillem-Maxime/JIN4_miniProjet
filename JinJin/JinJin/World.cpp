@@ -20,6 +20,7 @@ World::World(sf::RenderWindow & window, EventHandler &handler) : window(window),
 
 void World::update(sf::Time dt)
 {
+
 	//Gravité exercé sur le joueur
 
 	//Le joueur touche-t-il le sol ? Si oui, plus de gravité
@@ -54,8 +55,21 @@ void World::update(sf::Time dt)
 
 
 	//Si le joueur tombe trop bas, il recommence
-	if (player->getPosition().y > 1700){
-		evHandler.addDrawText("lol");
+	if (player->getPosition().y > 1650){
+		++deathCount;
+		switch (deathCount)
+		{
+		case 1:
+			evHandler.addDrawText("Dommage", 200);
+			break;
+		case 2:
+			evHandler.addDrawText("Incapable", 200);
+			break;
+		default:
+			evHandler.addDrawText("lol", 800);
+			break;
+		}
+		
 		reset();
 	}
 
@@ -96,7 +110,8 @@ void World::reset()
 {
 	player->setPosition(spawnPosition);
 	worldView.setCenter(spawnPosition);
-	//rajouter le reset de l'inversion des plateformes une fois implémenté dasn update
+	evHandler.addInverse();
+	inversed = false;
 }
 
 void World::loadTextures()

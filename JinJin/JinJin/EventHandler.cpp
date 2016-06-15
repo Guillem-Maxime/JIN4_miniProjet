@@ -109,11 +109,12 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 		
 		if (textTime == sf::Time::Zero)
 		{
-			sf::String a = textString;
+			sf::String str = textString;
+			int size = textSize;
 			Command set;
 			set.category = Category::Text;
-			set.action = derivedAction<TextBox>([a](TextBox& text, sf::Time) {
-				text.displayText(a);
+			set.action = derivedAction<TextBox>([str, size](TextBox& text, sf::Time) {
+				text.displayText(str, size);
 			});
 			commands.push(set);
 
@@ -158,13 +159,14 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 	}
 }
 
-void EventHandler::addDrawText(const sf::String str)
+void EventHandler::addDrawText(const sf::String str, int size)
 {
 	if (!displaying)
 	{
 		displaying = true;
 		textTime = sf::Time::Zero;
 		textString = str;
+		textSize = size;
 	}
 
 }

@@ -6,7 +6,7 @@ public:
 	TextBox(const sf::Font &f, sf::Color color);
 	void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
 
-	void displayText(sf::String str);
+	void displayText(sf::String str, int size);
 
 	unsigned int getCategory() const;
 
