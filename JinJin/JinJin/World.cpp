@@ -4,14 +4,8 @@
 
 
 /* Initialisation */
-<<<<<<< HEAD
 World::World(sf::RenderWindow & window) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
 , spawnPosition(240, 1570)
-=======
-World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
-, evHandler(handler)
-, spawnPosition(200, 400)
->>>>>>> 5b8e44ca8d725b44aea9f231d5032c9bff3f7479
 ,player(nullptr), grounded(false)
 {
 	loadTextures();
