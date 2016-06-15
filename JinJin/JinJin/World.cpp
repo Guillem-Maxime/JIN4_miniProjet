@@ -95,7 +95,7 @@ void World::reset()
 
 void World::loadTextures()
 {
-	textures.load(Textures::Player, "Media/Sprites/character.png");
+	textures.load(Textures::Player, "Media/Sprites/idle.png");
 	textures.load(Textures::Platform1, "Media/Sprites/Platform1.png");
 	textures.load(Textures::Platform2, "Media/Sprites/Platform2.png");
 	textures.load(Textures::Platform3, "Media/Sprites/Platform3.png");
