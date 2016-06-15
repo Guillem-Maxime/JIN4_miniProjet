@@ -94,7 +94,7 @@ void World::update(sf::Time dt)
 	
 	if (inversed && player->getPosition().x > 5350 && player->getPosition().y < 650) {
 		inversed = false;
-		evHandler.addDrawText("You've beaten the game", 200);
+		evHandler.addDrawText("You've beaten the game", 100);
 		evHandler.addInverse();
 		player->setVelocity(sf::Vector2f(0,0));
 	}
@@ -248,7 +248,7 @@ void World::buildLevel() {
 	posSh2.push_back(sf::Vector2f(3005, 1450));
 
 	//a partir de là il y a les ombres
-	posLamps.push_back(sf::Vector2f(3355, 1570));
+	posLamps.push_back(sf::Vector2f(3355, 1515));
 	posPF1.push_back(sf::Vector2f(3375, 1325));
 	posSh1.push_back(sf::Vector2f(3425, 1300));
 
@@ -268,15 +268,14 @@ void World::buildLevel() {
 	//Les trois petites plateformes
 	posLamps.push_back(sf::Vector2f(4750, 550));
 	posPF3.push_back(sf::Vector2f(4650, 600));
-
-	posSh3.push_back(sf::Vector2f(4450, 580));
+	posSh3.push_back(sf::Vector2f(4500, 580));
 	posPF3.push_back(sf::Vector2f(4750, 650));
 	posSh3.push_back(sf::Vector2f(4750, 750));
 	posPF3.push_back(sf::Vector2f(4850, 600));
-	posSh3.push_back(sf::Vector2f(5050, 585));
+	posSh3.push_back(sf::Vector2f(5000, 585));
 
 	//The Last One
-	posLamps.push_back(sf::Vector2f(5250, 450));
+	posLamps.push_back(sf::Vector2f(5350, 450));
 	posLamps.push_back(sf::Vector2f(5550, 450));
 	posPF1.push_back(sf::Vector2f(5450, 650));
 	posSh1.push_back(sf::Vector2f(5450, 700));
