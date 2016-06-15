@@ -2,7 +2,7 @@
 #include <iostream>
 
 /* Définition constante du temps d'une frame*/
-const sf::Time TimePerFrame = sf::seconds(1.f / 30.f);
+const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), world(window), evHandler()
 {
@@ -16,7 +16,7 @@ void Game::run()
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (window.isOpen())
 	{
-		processEvents();
+		//processEvents();
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
@@ -25,6 +25,7 @@ void Game::run()
 			update(TimePerFrame);
 		}
 		render();
+		
 	}
 }
 

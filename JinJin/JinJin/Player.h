@@ -13,7 +13,10 @@ public:
 	virtual sf::FloatRect getBoundingRect() const;
 
 	bool getGrounded();
+	bool getJumping();
 	void setGrounded(bool g);
+
+	void setJumping(bool j);
 
 	void jump(float playerspeed);
 

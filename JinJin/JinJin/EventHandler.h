@@ -9,8 +9,14 @@ class CommandQueue;
 class EventHandler
 {
 public:
+	EventHandler();
 	void handleEvent(const sf::Event& event, CommandQueue& commands);
 	void handleRealtimeInput(CommandQueue& commands);
+
+private:
+	bool jumping;
+
+	sf::Time jumpTime;
 
 };
 
