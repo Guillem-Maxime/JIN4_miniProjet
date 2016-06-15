@@ -87,11 +87,16 @@ void World::update(sf::Time dt)
 	worldView.setCenter(center);
 	text->setPosition(player->getPosition());
 	
-	if (!inversed && player->getPosition().x > 3200 ) {
+	if (!inversed && player->getPosition().x > 3200 && player->getPosition().x < 5350) {
 		evHandler.addInverse();
 		inversed = true;
 	}
 	
+	if (player->getPosition().x > 5350 && player->getPosition().y < 650) {
+		inversed = false;
+		evHandler.addDrawText("You've beaten the game", 200);
+		player->setVelocity(sf::Vector2f(0,0));
+	}
 
 }
 
@@ -194,64 +199,71 @@ void World::buildLevel() {
 	std::unique_ptr<Plateform> pFloor = std::make_unique<Plateform>(textures, 4);
 	pFloor->setPosition(sf::Vector2f(3707.5, 1675));
 	sceneLayers[Front]->attachChild(std::move(pFloor));
-	//Le Plafond
-	/*
-	std::unique_ptr<Plateform> pRoof = std::make_unique<Plateform>(textures, 4);
-	pRoof->setPosition(sf::Vector2f(3707.5, 905));
-	sceneLayers[Front]->attachChild(std::move(pRoof));
-	*/
 
 	//Les murs
 	std::unique_ptr<Plateform> pWall1 = std::make_unique<Plateform>(textures, 5);
 	pWall1->setPosition(sf::Vector2f(142, 1290));
 	sceneLayers[Front]->attachChild(std::move(pWall1));
+	pWall1 = std::make_unique<Plateform>(textures, 5);
+	pWall1->setPosition(sf::Vector2f(142, 890));
+	sceneLayers[Front]->attachChild(std::move(pWall1));
+
 	std::unique_ptr<Plateform> pWall2 = std::make_unique<Plateform>(textures, 5);
 	pWall2->setPosition(sf::Vector2f(7280, 1290));
 	sceneLayers[Front]->attachChild(std::move(pWall2));
 
-	//D'abord le bas et le haut
-
-	for (int i = 0; i < 30; ++i) {
-		posPF1.push_back(sf::Vector2f(float(i * 240 + 215), 1675));
-		posPF1.push_back(sf::Vector2f(float(i * 240 + 215), 905));
-	}
-
-
-	//Puis la gauche et la droite
-
-	for (int i = 0; i < 5; ++i) {
-		posPF2.push_back(sf::Vector2f(130, float(i * 140 + 1010)));
-		posPF2.push_back(sf::Vector2f(7050, float(i * 140 + 1010)));
-	}
-
 
 	//Le premier module
+	posLamps.push_back(sf::Vector2f(300, 1230));
 	posPF2.push_back(sf::Vector2f(535, 1430));
+	posSh2.push_back(sf::Vector2f(555, 1450));
 	posPF2.push_back(sf::Vector2f(535, 1570));
+	posSh2.push_back(sf::Vector2f(555, 1590));
 	posPF3.push_back(sf::Vector2f(460, 1500));
+	posSh3.push_back(sf::Vector2f(480, 1520));
 	posPF1.push_back(sf::Vector2f(645, 1395));
+	posSh1.push_back(sf::Vector2f(665, 1415));
 	posPF1.push_back(sf::Vector2f(885, 1395));
+	posSh1.push_back(sf::Vector2f(905, 1415));
 	posPF2.push_back(sf::Vector2f(1005, 1430));
+	posSh2.push_back(sf::Vector2f(1025, 1450));
 	posPF2.push_back(sf::Vector2f(1005, 1570));
+	posSh2.push_back(sf::Vector2f(1025, 1590));
 	posPF3.push_back(sf::Vector2f(1075, 1500));
+	posSh3.push_back(sf::Vector2f(1095, 1520));
 
 	//La longue plateforme seule
+	posLamps.push_back(sf::Vector2f(1400, 1230));
 	posPF1.push_back(sf::Vector2f(1400, 1395));
+	posSh1.push_back(sf::Vector2f(1400, 1415));
+
 	
 	//Les trois petites plateformes seules
+	posLamps.push_back(sf::Vector2f(1990, 1230));
 	posPF3.push_back(sf::Vector2f(1750, 1430));
+	posSh3.push_back(sf::Vector2f(1700, 1470));
 	posPF3.push_back(sf::Vector2f(1990, 1480));
+	posSh3.push_back(sf::Vector2f(1990, 1520));
 	posPF3.push_back(sf::Vector2f(2230, 1390));
+	posSh3.push_back(sf::Vector2f(2250, 1430));
+
 
 	//Le deuxième module
 	posPF2.push_back(sf::Vector2f(2555, 1570));
+	posSh2.push_back(sf::Vector2f(2595, 1590));
 	posPF2.push_back(sf::Vector2f(2555, 1430));
+	posSh2.push_back(sf::Vector2f(2595, 1450));
 	posPF1.push_back(sf::Vector2f(2640, 1325));
+	posSh1.push_back(sf::Vector2f(2680, 1345));
 	posPF1.push_back(sf::Vector2f(2880, 1325));
+	posSh1.push_back(sf::Vector2f(2920, 1345));
 	posPF2.push_back(sf::Vector2f(2965, 1570));
+	posSh2.push_back(sf::Vector2f(3005, 1590));
 	posPF2.push_back(sf::Vector2f(2965, 1430));
+	posSh2.push_back(sf::Vector2f(3005, 1450));
 
 	//a partir de là il y a les ombres
+	posLamps.push_back(sf::Vector2f(3355, 1570));
 	posPF1.push_back(sf::Vector2f(3375, 1325));
 	posSh1.push_back(sf::Vector2f(3425, 1300));
 
@@ -269,15 +281,19 @@ void World::buildLevel() {
 
 
 	//Les trois petites plateformes
-	posLamps.push_back(sf::Vector2f(4650, 550));
-	posPF3.push_back(sf::Vector2f(4550, 550));
-	posSh3.push_back(sf::Vector2f(4350, 535));
+	posLamps.push_back(sf::Vector2f(4750, 550));
 	posPF3.push_back(sf::Vector2f(4650, 600));
-	posSh3.push_back(sf::Vector2f(4650, 750));
-	posPF3.push_back(sf::Vector2f(4750, 550));
-	posSh3.push_back(sf::Vector2f(4850, 535));
+	posSh3.push_back(sf::Vector2f(4450, 580));
+	posPF3.push_back(sf::Vector2f(4750, 650));
+	posSh3.push_back(sf::Vector2f(4750, 750));
+	posPF3.push_back(sf::Vector2f(4850, 600));
+	posSh3.push_back(sf::Vector2f(5050, 585));
 
-
+	//The Last One
+	posLamps.push_back(sf::Vector2f(5250, 450));
+	posLamps.push_back(sf::Vector2f(5550, 450));
+	posPF1.push_back(sf::Vector2f(5450, 650));
+	posSh1.push_back(sf::Vector2f(5450, 700));
 
 	//On cree le level
 	//On cree les ombres en premier pour qu'elles soient en dessous
