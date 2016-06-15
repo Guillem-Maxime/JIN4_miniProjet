@@ -13,25 +13,29 @@ World::World(sf::RenderWindow & window) : window(window), worldView(window.getDe
 
 	worldView.setCenter(spawnPosition);
 
-	window.setFramerateLimit(30);
+	window.setFramerateLimit(60);
 }
 
 void World::update(sf::Time dt)
 {
 	//Gravité exercé sur le joueur
-	player->setVelocity(0.f, 400.f);
+	//player->setVelocity(0.f, 400.f);
+
+	//Le joueur touche-t-il le sol ? Si oui, plus de gravité
+	player->setGrounded(sceneGraph.checkSceneCollision(sceneGraph));
+	if (!player->getGrounded() && !player->getJumping())
+	{
+		player->setVelocity(0.f, 400.f);
+	} else
+	{
+		player->setVelocity(0.f, 0.f);
+	}
 
 	//Application des commandes dans la liste
 	while (!comQueue.isEmpty())
 		sceneGraph.onCommand(comQueue.pop(), dt);
 
-	//Le joueur touche-t-il le sol ? Si oui, plus de gravité
-	player->setGrounded(sceneGraph.checkSceneCollision(sceneGraph));
-	if (player->getGrounded())
-	{
-		sf::Vector2f v = player->getVelocity();
-		player->setVelocity(v.x, v.y - 400.f);
-	}
+	
 	
 	//mise à jour du graphe de scène (principalement déplacement des entitéés) 
 	sceneGraph.update(dt);
@@ -91,7 +95,7 @@ void World::loadTextures()
 	textures.load(Textures::Platform2, "Media/Sprites/Platform2.png");
 	textures.load(Textures::Platform3, "Media/Sprites/Platform3.png");
 	textures.load(Textures::Shadow, "Media/Sprites/3.png");
-	textures.load(Textures::Background, "Media/Tiles/background.jpg");
+	textures.load(Textures::Background, "Media/Tiles/background.png");
 }
 
 void World::buildScene()
@@ -118,7 +122,7 @@ void World::buildScene()
 	//création des plateformes
 	//Positions voulue pour les ombres
 	std::vector<sf::Vector2f> pos;
-	pos.push_back(sf::Vector2f(200, 800));
+	pos.push_back(sf::Vector2f(200, 845));
 	pos.push_back(sf::Vector2f(350, 700));
 	pos.push_back(sf::Vector2f(400, 400));
 	pos.push_back(sf::Vector2f(500, 600));
@@ -127,19 +131,29 @@ void World::buildScene()
 	pos.push_back(sf::Vector2f(700, 400));
 	pos.push_back(sf::Vector2f(800, 410));
 	pos.push_back(sf::Vector2f(1000, 400));
+	pos.push_back(sf::Vector2f(600, 600));
+	pos.push_back(sf::Vector2f(700, 735));
+	pos.push_back(sf::Vector2f(800, 835));
+	pos.push_back(sf::Vector2f(900, 935));
+	pos.push_back(sf::Vector2f(1000, 1035));
+	pos.push_back(sf::Vector2f(1100, 1135));
+	pos.push_back(sf::Vector2f(1200, 1235));
+	pos.push_back(sf::Vector2f(1300, 1305));
+	pos.push_back(sf::Vector2f(1433, 1433));
 
 	//on crée les ombres puis la plateforme associée
 	for (auto position : pos)
 	{
 		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1);
-		float a = -30.f * 0.003*position.x;
-		p->setPosition(sf::Vector2f(a, -20));
+		/*float a = -30.f * 0.003*position.x;
+		p->setPosition(sf::Vector2f(a, -20));*/
 		
-		std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures);
-		s->setPosition(position);
+		/*std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures);
+		s->setPosition(position);*/
 
-		s->attachChild(std::move(p));
-		sceneLayers[Front]->attachChild(std::move(s));
+		//s->attachChild(std::move(p));
+		p->setPosition(position);
+		sceneLayers[Front]->attachChild(std::move(p));
 	}
 
 	//On crée le personnage

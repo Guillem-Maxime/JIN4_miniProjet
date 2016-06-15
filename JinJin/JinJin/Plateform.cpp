@@ -33,7 +33,7 @@ sf::FloatRect Plateform::getBoundingRect() const
 	{
 		//on adapte le rectangle de colision pour n'avoir que le bord superieur
 		sf::FloatRect a = sprite.getGlobalBounds();
-		a.height /= 30;
+		a.height /= 2;
 		return getWorldTransform().transformRect(a);
 	} else
 	{
