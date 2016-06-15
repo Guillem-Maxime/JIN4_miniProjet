@@ -86,10 +86,12 @@ void World::reset()
 
 void World::loadTextures()
 {
-	textures.load(Textures::Player, "Media/Sprites/1.png");
-	textures.load(Textures::Platform, "Media/Sprites/2.png");
+	textures.load(Textures::Player, "Media/Sprites/character.png");
+	textures.load(Textures::Platform1, "Media/Sprites/Platform1.png");
+	textures.load(Textures::Platform2, "Media/Sprites/Platform2.png");
+	textures.load(Textures::Platform3, "Media/Sprites/Platform3.png");
 	textures.load(Textures::Shadow, "Media/Sprites/3.png");
-	textures.load(Textures::Background, "Media/Tiles/1.jpg");
+	textures.load(Textures::Background, "Media/Tiles/background.jpg");
 }
 
 void World::buildScene()
@@ -129,7 +131,7 @@ void World::buildScene()
 	//on crée les ombres puis la plateforme associée
 	for (auto position : pos)
 	{
-		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures);
+		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1);
 		float a = -30.f * 0.003*position.x;
 		p->setPosition(sf::Vector2f(a, -20));
 		

@@ -1,7 +1,18 @@
 #include "Plateform.h"
 
-Plateform::Plateform(const TextureHolder & textures) : sprite(textures.get(Textures::Platform)), inversed(false)
+Plateform::Plateform(const TextureHolder & textures, int type) : inversed(false)
 {
+	switch (type) {
+	case 1 :
+		sprite = sf::Sprite(textures.get(Textures::Platform1));
+		break;
+	case 2 :
+		sprite = sf::Sprite(textures.get(Textures::Platform2));
+		break;
+	case 3 :
+		sprite = sf::Sprite(textures.get(Textures::Platform3));
+		break;
+	}
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 }
