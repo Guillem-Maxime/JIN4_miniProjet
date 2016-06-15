@@ -10,9 +10,8 @@ World::World(sf::RenderWindow & window, EventHandler &handler) : window(window),
 
 {
 	loadTextures();
-	buildLevel();
-	buildScene();
 
+	buildScene();
 
 	worldView.setCenter(spawnPosition);
 
@@ -131,29 +130,8 @@ void World::buildScene()
 	backSprite->setPosition(worldBounds.left, worldBounds.top);
 	sceneLayers[Back]->attachChild(std::move(backSprite));
 
-	//création des plateformes
-	//Positions voulue pour les ombres
-	/*
-	std::vector<sf::Vector2f> pos;
-	pos.push_back(sf::Vector2f(200, 845));
-	pos.push_back(sf::Vector2f(350, 700));
-	pos.push_back(sf::Vector2f(400, 400));
-	pos.push_back(sf::Vector2f(500, 600));
-	pos.push_back(sf::Vector2f(550, 550));
-	pos.push_back(sf::Vector2f(600, 396));
-	pos.push_back(sf::Vector2f(700, 400));
-	pos.push_back(sf::Vector2f(800, 410));
-	pos.push_back(sf::Vector2f(1000, 400));
-	pos.push_back(sf::Vector2f(600, 600));
-	pos.push_back(sf::Vector2f(700, 735));
-	pos.push_back(sf::Vector2f(800, 835));
-	pos.push_back(sf::Vector2f(900, 935));
-	pos.push_back(sf::Vector2f(1000, 1035));
-	pos.push_back(sf::Vector2f(1100, 1135));
-	pos.push_back(sf::Vector2f(1200, 1235));
-	pos.push_back(sf::Vector2f(1300, 1305));
-	pos.push_back(sf::Vector2f(1433, 1433));
-	*/
+
+	buildLevel();
 
 	//on crée les ombres puis la plateforme associée
 	/*
