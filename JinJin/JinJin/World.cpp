@@ -5,8 +5,8 @@
 
 /* Initialisation */
 World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
-, spawnPosition(440, 1170)
-,player(nullptr), grounded(false), evHandler(handler)
+, spawnPosition(440, 1570)
+,player(nullptr), grounded(false), inversed(false), evHandler(handler)
 
 {
 	loadTextures();
@@ -51,12 +51,12 @@ void World::update(sf::Time dt)
 
 	player->setPosition(position);
 
+
+
 	//Si le joueur tombe trop bas, il recommence
-	if (player->getPosition().y > 1700)
-	{
+	if (player->getPosition().y > 1700){
 		evHandler.addDrawText("lol");
 		reset();
-
 	}
 
 	//La vue du monde est centrée sur le joueur (mêmes mouvements que lui et est contrainte aussi)
@@ -72,10 +72,12 @@ void World::update(sf::Time dt)
 
 	worldView.setCenter(center);
 	text->setPosition(player->getPosition());
-
-	if (player->getPosition().x > 3200) {
+	
+	if (!inversed && player->getPosition().x > 3200 ) {
 		evHandler.addInverse();
+		inversed = true;
 	}
+	
 
 }
 
@@ -262,15 +264,14 @@ void World::buildLevel() {
 	posSh1.push_back(sf::Vector2f(4205, 750));
 
 
-	//Les quatres petites plateformes
-	posPF3.push_back(sf::Vector2f(3800, 950));
-	posSh3.push_back(sf::Vector2f(3865, 900));
-	posPF3.push_back(sf::Vector2f(3800, 950));
-	posSh3.push_back(sf::Vector2f(3865, 900));
-	posPF3.push_back(sf::Vector2f(3800, 950));
-	posSh3.push_back(sf::Vector2f(3865, 900));
-	posPF3.push_back(sf::Vector2f(3800, 950));
-	posSh3.push_back(sf::Vector2f(3865, 900));
+	//Les trois petites plateformes
+	posPF3.push_back(sf::Vector2f(4550, 550));
+	posSh3.push_back(sf::Vector2f(4350, 535));
+	posPF3.push_back(sf::Vector2f(4650, 600));
+	posSh3.push_back(sf::Vector2f(4650, 750));
+	posPF3.push_back(sf::Vector2f(4750, 550));
+	posSh3.push_back(sf::Vector2f(4850, 535));
+
 
 
 	//On cree le level

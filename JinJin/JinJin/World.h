@@ -60,6 +60,7 @@ private:
 	CommandQueue comQueue;
 
 	bool grounded;
+	bool inversed;
 
 
 	EventHandler& evHandler;
