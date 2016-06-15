@@ -57,5 +57,7 @@ private:
 
 	bool grounded;
 
+	EventHandler* evHandler;
+
 };
 

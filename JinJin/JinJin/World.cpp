@@ -36,7 +36,6 @@ void World::update(sf::Time dt)
 		sceneGraph.onCommand(comQueue.pop(), dt);
 
 	
-	
 	//mise à jour du graphe de scène (principalement déplacement des entitéés) 
 	sceneGraph.update(dt);
 
@@ -53,7 +52,11 @@ void World::update(sf::Time dt)
 
 	//Si le joueur tombe trop bas, il recommence
 	if (player->getPosition().y > 1700)
+	{
+		
 		reset();
+
+	}
 
 	//La vue du monde est centrée sur le joueur (mêmes mouvements que lui et est contrainte aussi)
 	sf::FloatRect viewBounds(worldView.getCenter() - worldView.getSize() / 2.f, worldView.getSize());
@@ -168,7 +171,7 @@ void World::buildScene()
 	if (!font.loadFromFile("game_over.ttf")){
 		std::cout << "erreur loadfromfile font" << std::endl;
 	}
-	std::unique_ptr<TextBox> textTB = std::make_unique<TextBox>("Hello World", font, sf::Vector2f(40, 40), spawnPosition);
+	std::unique_ptr<TextBox> textTB = std::make_unique<TextBox>("LOL", font, sf::Vector2f(400, 400), spawnPosition);
 	sceneLayers[Text]->attachChild(std::move(textTB));
 
 

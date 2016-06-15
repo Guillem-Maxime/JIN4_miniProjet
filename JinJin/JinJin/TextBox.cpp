@@ -3,11 +3,16 @@
 
 TextBox::TextBox(const sf::String &str,const sf::Font &f, const sf::Vector2f v, const sf::Vector2f origin) : 
 	font (f),
-	text(str, font,20),
-	box(v)
+	box(v), 
+	draw(false)
 {
-	//text.setOrigin(origin);
-	//box.setOrigin(origin);
+	sf::FloatRect bounds = text.getLocalBounds();
+	text.setOrigin(bounds.width / 2.f , bounds.height / 2.f + 800);
+
+	box.setPosition(400, 400);
+	text.setFont(font);
+	text.setPosition(100, 100);
+	text.setCharacterSize(800);
 	box.setFillColor(sf::Color::Black);
 	box.setOutlineThickness(5);
 	box.setOutlineColor(sf::Color::White);
@@ -15,7 +20,26 @@ TextBox::TextBox(const sf::String &str,const sf::Font &f, const sf::Vector2f v, 
 
 void TextBox::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const{
 
-	target.draw(box, states);
-	target.draw(text, states);
+	if (draw)
+	{
+		//target.draw(box, states);
+		target.draw(text, states);
+	}
 	
+}
+
+void TextBox::displayText(sf::String str, sf::Vector2f pos)
+{
+	text.setString(str);
+	text.setPosition(pos);
+}
+
+unsigned int TextBox::getCategory() const
+{
+	return Category::Text;
+}
+
+void TextBox::setDrawing(bool val)
+{
+	draw = val;
 }

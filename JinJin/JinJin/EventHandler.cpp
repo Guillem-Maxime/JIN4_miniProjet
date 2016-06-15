@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Plateform.h"
 #include "Shadow.h"
+#include "TextBox.h"
 
 #include <iostream>
 
@@ -21,7 +22,7 @@ struct PlayerMover
 	sf::Vector2f velocity;
 };
 
-EventHandler::EventHandler() : jumping(false)
+EventHandler::EventHandler() : jumping(false), displaying(false)
 {
 }
 
@@ -110,4 +111,39 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 		moveUp.action = derivedAction<Player>(PlayerMover(0.75*playerspeed, 0.f));
 		commands.push(moveUp);
 	}
+
+	if (displaying)
+	{
+		
+		if (textTime == sf::Time::Zero)
+		{
+			Command display;
+			display.category = Category::Text;
+			display.action = derivedAction<TextBox>([](TextBox& text, sf::Time) {
+				text.setDrawing(true);
+			});
+			commands.push(display);
+		} else if( textTime.asSeconds() > 3)
+		{
+			displaying = false;
+			Command endDisplay;
+			endDisplay.category = Category::Player;
+			endDisplay.action = derivedAction<TextBox>([](TextBox& text, sf::Time) {
+				text.setDrawing(false);
+			});
+			commands.push(endDisplay);
+		}
+		textTime += TimePerFrame;
+
+	}
+}
+
+void EventHandler::addDrawText()
+{
+	if (!displaying)
+	{
+		displaying = true;
+		textTime = sf::Time::Zero;
+	}
+
 }
