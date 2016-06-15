@@ -1,5 +1,12 @@
 #include "Plateform.h"
 
+//Le type indique le type de texture à charger : 
+/* 1: Plateforme horizontale
+ * 2: Plateforme verticale
+ * 3: Petite Plateforme
+ * 4: Sol
+ * 5: Murs
+ */
 Plateform::Plateform(const TextureHolder & textures, int type) : inversed(false)
 {
 	switch (type) {
@@ -11,6 +18,12 @@ Plateform::Plateform(const TextureHolder & textures, int type) : inversed(false)
 		break;
 	case 3 :
 		sprite = sf::Sprite(textures.get(Textures::Platform3));
+		break;
+	case 4 :
+		sprite = sf::Sprite(textures.get(Textures::Floor));
+		break;
+	case 5:
+		sprite = sf::Sprite(textures.get(Textures::Wall));
 		break;
 	}
 	sf::FloatRect bounds = sprite.getLocalBounds();
