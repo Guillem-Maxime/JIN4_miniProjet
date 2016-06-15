@@ -2,8 +2,19 @@
 
 
 
-Shadow::Shadow(const TextureHolder& textures) : sprite(textures.get(Textures::Shadow)), inversed(false)
+Shadow::Shadow(const TextureHolder& textures, int type) : inversed(false)
 {
+	switch (type) {
+	case 1:
+		sprite = sf::Sprite(textures.get(Textures::Shadow1));
+		break;
+	case 2:
+		sprite = sf::Sprite(textures.get(Textures::Shadow2));
+		break;
+	case 3:
+		sprite = sf::Sprite(textures.get(Textures::Shadow3));
+		break;
+	}
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 }
