@@ -21,7 +21,6 @@ World::World(sf::RenderWindow & window, EventHandler &handler) : window(window),
 void World::update(sf::Time dt)
 {
 	//Gravité exercé sur le joueur
-	//player->setVelocity(0.f, 400.f);
 
 	//Le joueur touche-t-il le sol ? Si oui, plus de gravité
 	player->setGrounded(sceneGraph.checkSceneCollision(sceneGraph));
@@ -173,7 +172,6 @@ void World::buildScene()
 
 	sceneLayers[Text]->attachChild(std::move(textTB));
 
-
 }
 
 void World::buildLevel() {
@@ -206,6 +204,22 @@ void World::buildLevel() {
 	std::unique_ptr<Plateform> pWall2 = std::make_unique<Plateform>(textures, 5);
 	pWall2->setPosition(sf::Vector2f(7280, 1290));
 	sceneLayers[Front]->attachChild(std::move(pWall2));
+
+	//D'abord le bas et le haut
+
+	for (int i = 0; i < 30; ++i) {
+		posPF1.push_back(sf::Vector2f(float(i * 240 + 215), 1675));
+		posPF1.push_back(sf::Vector2f(float(i * 240 + 215), 905));
+	}
+
+
+	//Puis la gauche et la droite
+
+	for (int i = 0; i < 5; ++i) {
+		posPF2.push_back(sf::Vector2f(130, float(i * 140 + 1010)));
+		posPF2.push_back(sf::Vector2f(7050, float(i * 140 + 1010)));
+	}
+
 
 	//Le premier module
 	posPF2.push_back(sf::Vector2f(535, 1430));

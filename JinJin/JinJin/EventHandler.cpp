@@ -123,7 +123,7 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 				text.setDrawing(true);
 			});
 			commands.push(display);
-		} else if( textTime.asSeconds() > 10)
+		} else if( textTime.asSeconds() > 3)
 		{
 			displaying = false;
 			Command endDisplay;

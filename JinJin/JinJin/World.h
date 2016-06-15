@@ -62,6 +62,7 @@ private:
 	bool grounded;
 	bool inversed;
 
+
 	EventHandler& evHandler;
 
 };
