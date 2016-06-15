@@ -277,12 +277,8 @@ void World::buildLevel() {
 	posPF3.push_back(sf::Vector2f(4750, 550));
 	posSh3.push_back(sf::Vector2f(4850, 535));
 
-	for(int i= 3050; i<5000; i+= 72)
-	{
-		posSpikes.push_back(sf::Vector2f(i, 1600));
-	}
 	
-
+	posSpikes.push_back(sf::Vector2f(3050, 1560));
 	//On cree le level
 	//On cree les ombres en premier pour qu'elles soient en dessous
 	for (auto position : posSh1) {
@@ -328,8 +324,12 @@ void World::buildLevel() {
 		sceneLayers[Front]->attachChild(std::move(l));
 	}
 
+	sf::Texture& texture = textures.get(Textures::Spike);
+	sf::IntRect textureRect(sf::IntRect(0,0,3000,76));
+	texture.setRepeated(true);
+
 	for (auto position : posSpikes) {
-		std::unique_ptr<Spikes> s = std::make_unique<Spikes>(textures);
+		std::unique_ptr<Spikes> s = std::make_unique<Spikes>(texture, textureRect);
 		s->setPosition(sf::Vector2f(position));
 		sceneLayers[Front]->attachChild(std::move(s));
 	}
