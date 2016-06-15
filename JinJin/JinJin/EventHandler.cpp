@@ -117,17 +117,25 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 		
 		if (textTime == sf::Time::Zero)
 		{
+			sf::String a = textString;
+			Command set;
+			set.category = Category::Text;
+			set.action = derivedAction<TextBox>([a](TextBox& text, sf::Time) {
+				text.displayText(a);
+			});
+			commands.push(set);
+
 			Command display;
 			display.category = Category::Text;
 			display.action = derivedAction<TextBox>([](TextBox& text, sf::Time) {
 				text.setDrawing(true);
 			});
 			commands.push(display);
-		} else if( textTime.asSeconds() > 3)
+		} else if( textTime.asSeconds() > 10)
 		{
 			displaying = false;
 			Command endDisplay;
-			endDisplay.category = Category::Player;
+			endDisplay.category = Category::Text;
 			endDisplay.action = derivedAction<TextBox>([](TextBox& text, sf::Time) {
 				text.setDrawing(false);
 			});
@@ -138,12 +146,13 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 	}
 }
 
-void EventHandler::addDrawText()
+void EventHandler::addDrawText(const sf::String str)
 {
 	if (!displaying)
 	{
 		displaying = true;
 		textTime = sf::Time::Zero;
+		textString = str;
 	}
 
 }

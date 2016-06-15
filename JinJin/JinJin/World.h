@@ -9,6 +9,7 @@
 #include "CommandQueue.h"
 #include "Command.h"
 #include "Textbox.h"
+#include "EventHandler.h"
 
 #include <SFML\Graphics.hpp>
 
@@ -20,7 +21,7 @@
 class World : public sf::NonCopyable
 {
 public:
-	explicit World(sf::RenderWindow &window);
+	explicit World(sf::RenderWindow &window, EventHandler &handler);
 	void update(sf::Time dt);
 	void draw();
 
@@ -52,12 +53,13 @@ private:
 	sf::Vector2f spawnPosition;
 	
 	Player* player;
+	TextBox* text;
 
 	CommandQueue comQueue;
 
 	bool grounded;
 
-	EventHandler* evHandler;
+	EventHandler& evHandler;
 
 };
 
