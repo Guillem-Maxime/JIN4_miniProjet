@@ -4,21 +4,13 @@
 
 
 /* Initialisation */
-<<<<<<< HEAD
 World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
-, spawnPosition(240, 1570)
+, spawnPosition(440, 1570)
 ,player(nullptr), grounded(false), evHandler(handler)
-=======
 
-World::World(sf::RenderWindow & window, EventHandler &handler) : window(window), worldView(window.getDefaultView()), worldBounds( 0.f,0.f,8000.f,2000.f)
-, evHandler(handler)
-, spawnPosition(200, 400)
-,player(nullptr), grounded(false)
->>>>>>> 6327010afd1e27ba76310f93763f6ce6d342f477
 {
 	loadTextures();
 	buildScene();
-	buildLevel();
 
 	worldView.setCenter(spawnPosition);
 
@@ -108,8 +100,8 @@ void World::loadTextures()
 	textures.load(Textures::Platform2, "Media/Sprites/Platform2.png");
 	textures.load(Textures::Platform3, "Media/Sprites/Platform3.png");
 	textures.load(Textures::Shadow1, "Media/Sprites/Shadow1.png");
-	textures.load(Textures::Shadow1, "Media/Sprites/Shadow2.png");
-	textures.load(Textures::Shadow1, "Media/Sprites/Shadow3.png");
+	textures.load(Textures::Shadow2, "Media/Sprites/Shadow2.png");
+	textures.load(Textures::Shadow3, "Media/Sprites/Shadow3.png");
 	textures.load(Textures::Background, "Media/Tiles/background.png");
 
 	textures.load(Textures::Floor, "Media/Sprites/Floor.png");
@@ -136,6 +128,9 @@ void World::buildScene()
 	std::unique_ptr<SpriteNode> backSprite = std::make_unique<SpriteNode>(texture, textureRect);
 	backSprite->setPosition(worldBounds.left, worldBounds.top);
 	sceneLayers[Back]->attachChild(std::move(backSprite));
+
+
+	buildLevel();
 
 	//création des plateformes
 	//Positions voulue pour les ombres

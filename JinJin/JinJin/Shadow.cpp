@@ -2,7 +2,7 @@
 
 
 
-Shadow::Shadow(const TextureHolder& textures) : sprite(textures.get(Textures::Shadow)), inversed(false)
+Shadow::Shadow(const TextureHolder& textures) : sprite(textures.get(Textures::Shadow1)), inversed(false)
 {
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
@@ -24,7 +24,7 @@ sf::FloatRect Shadow::getBoundingRect() const
 	if (inversed)
 	{
 		sf::FloatRect a = sprite.getGlobalBounds();
-		a.height /= 30;
+		a.height /= 10;
 		return getWorldTransform().transformRect(a);
 	} else
 	{

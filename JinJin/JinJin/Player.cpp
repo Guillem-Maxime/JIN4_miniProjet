@@ -29,8 +29,10 @@ sf::FloatRect Player::getBoundingRect() const
 {
 	//on adapte le rectangle de collision pour n'avoir que la partie inferieure
 	sf::FloatRect a = sprite.getGlobalBounds();
-	a.top += a.height*0.5;
-	a.height /= 2;
+	a.top += a.height*0.75;
+	a.height /= 4;
+	a.left += a.width*0.25;
+	a.width /= 2;
 	return getWorldTransform().transformRect(a);
 }
 
