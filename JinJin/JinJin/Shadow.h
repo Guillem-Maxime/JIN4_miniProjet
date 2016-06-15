@@ -6,7 +6,7 @@
 class Shadow : public Entity
 {
 public:
-	Shadow(const TextureHolder& textures);
+	Shadow(const TextureHolder& textures, int type);
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
 	virtual unsigned int getCategory() const;
 

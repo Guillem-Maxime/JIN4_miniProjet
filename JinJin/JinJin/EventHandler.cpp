@@ -137,6 +137,8 @@ void EventHandler::handleRealtimeInput(CommandQueue & commands)
 
 	}
 
+	//Inversion
+
 	if (inversed)
 	{
 		Command output;

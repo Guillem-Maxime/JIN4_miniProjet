@@ -10,6 +10,7 @@ World::World(sf::RenderWindow & window, EventHandler &handler) : window(window),
 
 {
 	loadTextures();
+
 	buildScene();
 
 	worldView.setCenter(spawnPosition);
@@ -40,13 +41,13 @@ void World::update(sf::Time dt)
 	sceneGraph.update(dt);
 
 	//On contraint le joueur à rester dans la zone de jeu
-	const float borderDistance = 200.f;
+	const float borderDistance = 380.f;
 
 	sf::Vector2f position = player->getPosition();
 	position.x = std::max(position.x, worldBounds.left + borderDistance);
 	position.x = std::min(position.x, worldBounds.left + worldBounds.width - borderDistance);
 	position.y = std::max(position.y, worldBounds.top + borderDistance);
-	position.y = std::min(position.y, worldBounds.top + worldBounds.height - borderDistance);
+	position.y = std::min(position.y, worldBounds.top + worldBounds.height - borderDistance + 40);
 
 	player->setPosition(position);
 
@@ -71,6 +72,10 @@ void World::update(sf::Time dt)
 
 	worldView.setCenter(center);
 	text->setPosition(player->getPosition());
+
+	if (player->getPosition().x > 3200) {
+		evHandler.addInverse();
+	}
 
 }
 
@@ -131,30 +136,6 @@ void World::buildScene()
 
 	buildLevel();
 
-	//création des plateformes
-	//Positions voulue pour les ombres
-	/*
-	std::vector<sf::Vector2f> pos;
-	pos.push_back(sf::Vector2f(200, 845));
-	pos.push_back(sf::Vector2f(350, 700));
-	pos.push_back(sf::Vector2f(400, 400));
-	pos.push_back(sf::Vector2f(500, 600));
-	pos.push_back(sf::Vector2f(550, 550));
-	pos.push_back(sf::Vector2f(600, 396));
-	pos.push_back(sf::Vector2f(700, 400));
-	pos.push_back(sf::Vector2f(800, 410));
-	pos.push_back(sf::Vector2f(1000, 400));
-	pos.push_back(sf::Vector2f(600, 600));
-	pos.push_back(sf::Vector2f(700, 735));
-	pos.push_back(sf::Vector2f(800, 835));
-	pos.push_back(sf::Vector2f(900, 935));
-	pos.push_back(sf::Vector2f(1000, 1035));
-	pos.push_back(sf::Vector2f(1100, 1135));
-	pos.push_back(sf::Vector2f(1200, 1235));
-	pos.push_back(sf::Vector2f(1300, 1305));
-	pos.push_back(sf::Vector2f(1433, 1433));
-	*/
-
 	//on crée les ombres puis la plateforme associée
 	/*
 	for (auto position : pos)
@@ -208,16 +189,18 @@ void World::buildLevel() {
 	pFloor->setPosition(sf::Vector2f(3707.5, 1675));
 	sceneLayers[Front]->attachChild(std::move(pFloor));
 	//Le Plafond
+	/*
 	std::unique_ptr<Plateform> pRoof = std::make_unique<Plateform>(textures, 4);
 	pRoof->setPosition(sf::Vector2f(3707.5, 905));
 	sceneLayers[Front]->attachChild(std::move(pRoof));
-	
+	*/
+
 	//Les murs
 	std::unique_ptr<Plateform> pWall1 = std::make_unique<Plateform>(textures, 5);
 	pWall1->setPosition(sf::Vector2f(142, 1290));
 	sceneLayers[Front]->attachChild(std::move(pWall1));
 	std::unique_ptr<Plateform> pWall2 = std::make_unique<Plateform>(textures, 5);
-	pWall2->setPosition(sf::Vector2f(7050, 1290));
+	pWall2->setPosition(sf::Vector2f(7280, 1290));
 	sceneLayers[Front]->attachChild(std::move(pWall2));
 
 	//D'abord le bas et le haut
@@ -247,25 +230,69 @@ void World::buildLevel() {
 	posPF3.push_back(sf::Vector2f(1075, 1500));
 
 	//La longue plateforme seule
-	posPF1.push_back(sf::Vector2f(1300, 1395));
+	posPF1.push_back(sf::Vector2f(1400, 1395));
 	
 	//Les trois petites plateformes seules
-	posPF3.push_back(sf::Vector2f(1550, 1430));
-	posPF3.push_back(sf::Vector2f(1790, 1480));
-	posPF3.push_back(sf::Vector2f(2030, 1390));
+	posPF3.push_back(sf::Vector2f(1750, 1430));
+	posPF3.push_back(sf::Vector2f(1990, 1480));
+	posPF3.push_back(sf::Vector2f(2230, 1390));
 
 	//Le deuxième module
-	posPF2.push_back(sf::Vector2f(2255, 1570));
-	posPF2.push_back(sf::Vector2f(2255, 1430));
-	posPF1.push_back(sf::Vector2f(2340, 1325));
-	posPF1.push_back(sf::Vector2f(2580, 1325));
-	posPF2.push_back(sf::Vector2f(2665, 1570));
-	posPF2.push_back(sf::Vector2f(2665, 1430));
+	posPF2.push_back(sf::Vector2f(2555, 1570));
+	posPF2.push_back(sf::Vector2f(2555, 1430));
+	posPF1.push_back(sf::Vector2f(2640, 1325));
+	posPF1.push_back(sf::Vector2f(2880, 1325));
+	posPF2.push_back(sf::Vector2f(2965, 1570));
+	posPF2.push_back(sf::Vector2f(2965, 1430));
 
-	//a partir de là il a les ombres
+	//a partir de là il y a les ombres
+	posPF1.push_back(sf::Vector2f(3375, 1325));
+	posSh1.push_back(sf::Vector2f(3425, 1300));
+
+	posPF1.push_back(sf::Vector2f(3800, 1250));
+	posSh1.push_back(sf::Vector2f(3865, 1200));
+
+	posPF1.push_back(sf::Vector2f(4000, 1050));
+	posSh1.push_back(sf::Vector2f(4105, 1000));
+
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
+	
+	posPF1.push_back(sf::Vector2f(4100, 800));
+	posSh1.push_back(sf::Vector2f(4205, 750));
+
+
+	//Les quatres petites plateformes
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
+	posPF3.push_back(sf::Vector2f(3800, 950));
+	posSh3.push_back(sf::Vector2f(3865, 900));
 
 
 	//On cree le level
+	//On cree les ombres en premier pour qu'elles soient en dessous
+	for (auto position : posSh1) {
+		std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures, 1);
+		s->setPosition(sf::Vector2f(position));
+		sceneLayers[Front]->attachChild(std::move(s));
+	}
+	for (auto position : posSh2) {
+		std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures, 2);
+		s->setPosition(sf::Vector2f(position));
+		sceneLayers[Front]->attachChild(std::move(s));
+	}
+
+	for (auto position : posSh3) {
+		std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures, 3);
+		s->setPosition(sf::Vector2f(position));
+		sceneLayers[Front]->attachChild(std::move(s));
+	}
+
+	//Puis les plateformes
 	for (auto position : posPF1) {
 		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1);
 		p->setPosition(sf::Vector2f(position));
@@ -283,4 +310,8 @@ void World::buildLevel() {
 		p->setPosition(sf::Vector2f(position));
 		sceneLayers[Front]->attachChild(std::move(p));
 	}
+
+
+
+
 }
