@@ -8,6 +8,7 @@ class Plateform : public Entity
 public:
 
 	Plateform(const TextureHolder& textures, int type);
+	Plateform(const TextureHolder& textures, int type, int range);
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
 	virtual unsigned int getCategory() const;
 
@@ -16,7 +17,14 @@ public:
 	void inverse();
 
 private:
+	virtual void updateCurrent(sf::Time dt);
+
+private:
 	sf::Sprite sprite;
 	bool inversed;
+
+	bool isMooving;
+	int range;
+	sf::Time time;
 };
 

@@ -24,7 +24,7 @@ void TextBox::displayText(sf::String str, int size)
 {
 	text.setString(str);
 	sf::FloatRect bounds = text.getLocalBounds();
-	text.setOrigin(bounds.width / 2.f + size*0.5, bounds.height / 2.f + size*0.75);
+	text.setOrigin(bounds.width / 2.f + size*static_cast<float>(0.5), bounds.height / 2.f + size*static_cast<float>(0.75));
 	text.setCharacterSize(size);
 }
 

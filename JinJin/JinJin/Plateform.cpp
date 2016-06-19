@@ -1,5 +1,7 @@
 #include "Plateform.h"
 
+#include <iostream>
+
 Plateform::Plateform(const TextureHolder & textures, int type) : inversed(false)
 {
 	switch (type) {
@@ -21,6 +23,15 @@ Plateform::Plateform(const TextureHolder & textures, int type) : inversed(false)
 	}
 	sf::FloatRect bounds = sprite.getLocalBounds();
 	sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+
+	setVelocity(10,0);
+}
+
+Plateform::Plateform(const TextureHolder & textures, int type, int range) : Plateform(textures,type)
+{
+	isMooving = true;
+	this->range = range;
+	time = sf::Time::Zero;
 }
 
 void Plateform::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
@@ -51,4 +62,15 @@ sf::FloatRect Plateform::getBoundingRect() const
 void Plateform::inverse()
 {
 	inversed = !inversed;
+}
+
+void Plateform::updateCurrent(sf::Time dt)
+{
+	if (isMooving)
+	{
+		time += dt;
+		float a = range * cos( 2* time.asSeconds());
+		//std::cout << dt.asSeconds() << std::endl;
+		move(sf::Vector2f(a,0));
+	}
 }

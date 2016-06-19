@@ -302,7 +302,7 @@ void World::buildLevel() {
 
 	//Puis les plateformes
 	for (auto position : posPF1) {
-		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1);
+		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1, 5);
 		p->setPosition(sf::Vector2f(position));
 		sceneLayers[Front]->attachChild(std::move(p));
 	}
