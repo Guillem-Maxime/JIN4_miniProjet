@@ -1,4 +1,5 @@
 #pragma once
+#include "Fps.h"
 #include "Entity.h"
 #include "TextureHolder.h"
 

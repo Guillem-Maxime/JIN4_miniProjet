@@ -74,11 +74,11 @@ void Plateform::updateCurrent(sf::Time dt)
 		ticks++;
 		if (isHorizontal)
 		{
-			nextMove = sf::Vector2f(range * cos(ticks/60 ) * dt.asSeconds(), 0) ;
+			nextMove = sf::Vector2f(range * cos(ticks * FTimePerFrame ) * dt.asSeconds(), 0) ;
 
 		} else
 		{
-			nextMove = sf::Vector2f(0, range * cos(ticks/60 )* dt.asSeconds());
+			nextMove = sf::Vector2f(0, range * cos(ticks * FTimePerFrame )* dt.asSeconds());
 			
 		}
 

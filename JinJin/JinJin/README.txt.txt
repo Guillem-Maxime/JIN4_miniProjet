@@ -1,0 +1,1 @@
+Si le jeu rencontre des problèmes de ralentissement, il faut que vous changiez les valeur "30.f" en "60.f" dans le fichier Fps.h .

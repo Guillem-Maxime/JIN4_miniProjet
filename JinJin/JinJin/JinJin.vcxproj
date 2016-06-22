@@ -153,6 +153,7 @@
     <ClInclude Include="CommandQueue.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="Fps.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Lamps.h" />
     <ClInclude Include="Plateform.h" />

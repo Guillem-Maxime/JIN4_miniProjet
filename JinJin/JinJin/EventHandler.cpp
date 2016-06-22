@@ -7,8 +7,6 @@
 
 #include <iostream>
 
-const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
-
 
 
 EventHandler::EventHandler() : jumping(false), displaying(false), inversed(false)

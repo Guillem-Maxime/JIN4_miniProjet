@@ -1,8 +1,6 @@
 #include "Shadow.h"
 
 
-
-
 Shadow::Shadow(const TextureHolder& textures, int type) : inversed(false)
 {
 	switch (type) {
@@ -65,11 +63,11 @@ void Shadow::updateCurrent(sf::Time dt)
 		ticks++;
 		if (isHorizontal)
 		{
-			nextMove = sf::Vector2f(range * cos(ticks / 60) * dt.asSeconds(), 0);
+			nextMove = sf::Vector2f(range * cos(ticks * FTimePerFrame) * dt.asSeconds(), 0);
 
 		} else
 		{
-			nextMove = sf::Vector2f(0, range * cos(ticks / 60)* dt.asSeconds());
+			nextMove = sf::Vector2f(0, range * cos(ticks * FTimePerFrame)* dt.asSeconds());
 
 		}
 

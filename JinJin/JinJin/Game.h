@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include "Fps.h"
 #include "World.h"
 #include "EventHandler.h"
 
