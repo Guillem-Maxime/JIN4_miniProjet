@@ -69,8 +69,7 @@ void Plateform::updateCurrent(sf::Time dt)
 	if (isMooving)
 	{
 		time += dt;
-		float a = range * cos( 2* time.asSeconds());
-		//std::cout << dt.asSeconds() << std::endl;
-		move(sf::Vector2f(a,0));
+		nextMoove = range * cos( 2* time.asSeconds());
+		move(sf::Vector2f(nextMoove,0));
 	}
 }

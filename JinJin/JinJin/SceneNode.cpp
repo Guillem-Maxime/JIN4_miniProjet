@@ -70,16 +70,22 @@ sf::FloatRect SceneNode::getBoundingRect() const
 	return sf::FloatRect();
 }
 
-bool SceneNode::checkNodeCollision(SceneNode & node)
+bool SceneNode::checkNodeCollision(SceneNode & node, float& pos)
 {
 	if (this != &node && this->getCategory() != node.getCategory() && collision(*this, node))
+	{
+		if (node.getCategory() == Category::Platform)
+			pos = node.nextMoove;
+		else
+			pos = this->nextMoove;
 		return true;
+	}
 
 	if(this->getCategory() == Category::Scene)
 	{
 		for (auto& child : children)
 		{
-			if (child->checkNodeCollision(node))
+			if (child->checkNodeCollision(node, pos))
 				return true;
 
 		}
@@ -89,15 +95,15 @@ bool SceneNode::checkNodeCollision(SceneNode & node)
 
 }
 
-bool SceneNode::checkSceneCollision(SceneNode & sceneGraph)
+bool SceneNode::checkSceneCollision(SceneNode & sceneGraph, float& pos)
 {
-	if (checkNodeCollision(sceneGraph))
+	if (checkNodeCollision(sceneGraph, pos))
 		return true;
 	
 	for	(auto& child : sceneGraph.children)
 	{
 
-		if (checkSceneCollision(*child))
+		if (checkSceneCollision(*child, pos))
 			return true;
 	}
 	return false;

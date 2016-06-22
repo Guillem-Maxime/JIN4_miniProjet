@@ -24,12 +24,14 @@ void World::update(sf::Time dt)
 	//Gravité exercé sur le joueur
 
 	//Le joueur touche-t-il le sol ? Si oui, plus de gravité
-	player->setGrounded(sceneGraph.checkSceneCollision(sceneGraph));
+	float posP = 0.f;
+	player->setGrounded(sceneGraph.checkSceneCollision(sceneGraph,posP));
 	if (!player->getGrounded() && !player->getJumping())
 	{
 		player->setVelocity(0.f, 400.f);
 	} else
 	{
+		player->setNextMoove(posP);
 		player->setVelocity(0.f, 0.f);
 	}
 
@@ -76,7 +78,7 @@ void World::update(sf::Time dt)
 	//La vue du monde est centrée sur le joueur (mêmes mouvements que lui et est contrainte aussi)
 	sf::FloatRect viewBounds(worldView.getCenter() - worldView.getSize() / 2.f, worldView.getSize());
 
-	worldView.move(player->getVelocity() * dt.asSeconds());
+	worldView.move(player->getVelocity().x * dt.asSeconds() + posP, player->getVelocity().y * dt.asSeconds());
 
 	sf::Vector2f center = worldView.getCenter();
 	center.x = std::min(center.x, worldBounds.width -borderDistance );

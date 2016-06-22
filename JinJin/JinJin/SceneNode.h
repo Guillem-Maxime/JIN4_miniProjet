@@ -32,9 +32,11 @@ public:
 	void onCommand(const Command& command, sf::Time dt);
 
 	virtual sf::FloatRect getBoundingRect() const;
-	bool checkNodeCollision(SceneNode& node);
-	bool checkSceneCollision(SceneNode& sceneGraph);
+	bool checkNodeCollision(SceneNode& node, float& pos);
+	bool checkSceneCollision(SceneNode& sceneGraph, float& pos);
 
+protected:
+	float nextMoove;
 
 private:
 
@@ -44,7 +46,6 @@ private:
 	virtual void updateCurrent(sf::Time dt);
 	void updateChildren(sf::Time dt);
 
-	void drawBoundingRect(sf::RenderTarget & target, sf::RenderStates) const;
 
 	std::vector<USPtr> children;
 	SceneNode* parent;
