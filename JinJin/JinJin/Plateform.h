@@ -8,6 +8,7 @@ class Plateform : public Entity
 public:
 
 	Plateform(const TextureHolder& textures, int type);
+	Plateform(const TextureHolder & textures, int type, int range);
 	Plateform(const TextureHolder& textures, int type, int range, bool isHor);
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
 	virtual unsigned int getCategory() const;
