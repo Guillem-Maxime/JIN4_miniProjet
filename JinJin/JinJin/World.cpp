@@ -222,12 +222,12 @@ void World::buildLevel() {
 	//La longue plateforme seule qui bouge (sans la torche)
 	posLamps.push_back(sf::Vector2f(1400, 1230));
 
-	std::unique_ptr<Shadow> s1 = std::make_unique<Shadow>(textures, 1);
-	s1->setPosition(sf::Vector2f(1400, 1415));
+	std::unique_ptr<Shadow> s1 = std::make_unique<Shadow>(textures, 1, 15, false);
+	s1->setPosition(sf::Vector2f(1400, 1315));
 	sceneLayers[Front]->attachChild(std::move(s1));
 
-	std::unique_ptr<Plateform> p1 = std::make_unique<Plateform>(textures, 1);
-	p1->setPosition(sf::Vector2f(1400, 1395));
+	std::unique_ptr<Plateform> p1 = std::make_unique<Plateform>(textures, 1, 15, false);
+	p1->setPosition(sf::Vector2f(1400, 1295));
 	sceneLayers[Front]->attachChild(std::move(p1));
 
 
@@ -286,28 +286,28 @@ void World::buildLevel() {
 
 	//Les deux plateformes qui bougent (sans lampes)
 
-	std::unique_ptr<Shadow> s2 = std::make_unique<Shadow>(textures, 1);
-	s2->setPosition(sf::Vector2f(5450, 400));
+	std::unique_ptr<Shadow> s2 = std::make_unique<Shadow>(textures, 1, 20, false);
+	s2->setPosition(sf::Vector2f(5450, 650));
 	sceneLayers[Front]->attachChild(std::move(s2));
 
-	std::unique_ptr<Plateform> p2 = std::make_unique<Plateform>(textures, 1);
-	p2->setPosition(sf::Vector2f(5450, 350));
+	std::unique_ptr<Plateform> p2 = std::make_unique<Plateform>(textures, 1, 20, false);
+	p2->setPosition(sf::Vector2f(5450, 600));
 	sceneLayers[Front]->attachChild(std::move(p2));
 
-	std::unique_ptr<Shadow> s3 = std::make_unique<Shadow>(textures, 1);
-	s3->setPosition(sf::Vector2f(5650, 1550));
+	std::unique_ptr<Shadow> s3 = std::make_unique<Shadow>(textures, 1, 15, true);
+	s3->setPosition(sf::Vector2f(5650, 1450));
 	sceneLayers[Front]->attachChild(std::move(s3));
 
-	std::unique_ptr<Plateform> p3 = std::make_unique<Plateform>(textures, 1);
-	p3->setPosition(sf::Vector2f(5650, 1500));
+	std::unique_ptr<Plateform> p3 = std::make_unique<Plateform>(textures, 1, 15, true);
+	p3->setPosition(sf::Vector2f(5650, 1400));
 	sceneLayers[Front]->attachChild(std::move(p3));
 
 	
 	//The Last One
-	posLamps.push_back(sf::Vector2f(6350, 1300));
-	posLamps.push_back(sf::Vector2f(6550, 1300));
-	posPF1.push_back(sf::Vector2f(6450, 1500));
-	posSh1.push_back(sf::Vector2f(6450, 1550));
+	posLamps.push_back(sf::Vector2f(6350, 1200));
+	posLamps.push_back(sf::Vector2f(6550, 1200));
+	posPF1.push_back(sf::Vector2f(6450, 1400));
+	posSh1.push_back(sf::Vector2f(6450, 1450));
 
 
 	//On cree le level
