@@ -31,7 +31,7 @@ void World::update(sf::Time dt)
 		player->setVelocity(0.f, 400.f);
 	} else
 	{
-		player->setNextMoove(posP);
+		player->setNextMove(posP);
 		player->setVelocity(0.f, 0.f);
 	}
 
@@ -94,7 +94,7 @@ void World::update(sf::Time dt)
 		inversed = true;
 	}
 	
-	if (inversed && player->getPosition().x > 5350 && player->getPosition().y < 650) {
+	if (inversed && player->getPosition().x > 6350 && player->getPosition().y > 1200) {
 		inversed = false;
 		evHandler.addDrawText("You've beaten the game", 100);
 		evHandler.addInverse();
@@ -219,10 +219,18 @@ void World::buildLevel() {
 	posPF3.push_back(sf::Vector2f(1075, 1500));
 	posSh3.push_back(sf::Vector2f(1095, 1520));
 
-	//La longue plateforme seule
+	//La longue plateforme seule qui bouge (sans la torche)
 	posLamps.push_back(sf::Vector2f(1400, 1230));
-	posPF1.push_back(sf::Vector2f(1400, 1395));
-	posSh1.push_back(sf::Vector2f(1400, 1415));
+
+	std::unique_ptr<Shadow> s1 = std::make_unique<Shadow>(textures, 1);
+	s1->setPosition(sf::Vector2f(1400, 1415));
+	sceneLayers[Front]->attachChild(std::move(s1));
+
+	std::unique_ptr<Plateform> p1 = std::make_unique<Plateform>(textures, 1);
+	p1->setPosition(sf::Vector2f(1400, 1395));
+	sceneLayers[Front]->attachChild(std::move(p1));
+
+
 
 	
 	//Les trois petites plateformes seules
@@ -276,21 +284,41 @@ void World::buildLevel() {
 	posPF3.push_back(sf::Vector2f(4850, 600));
 	posSh3.push_back(sf::Vector2f(5000, 585));
 
+	//Les deux plateformes qui bougent (sans lampes)
 
+	std::unique_ptr<Shadow> s2 = std::make_unique<Shadow>(textures, 1);
+	s2->setPosition(sf::Vector2f(5450, 400));
+	sceneLayers[Front]->attachChild(std::move(s2));
+
+	std::unique_ptr<Plateform> p2 = std::make_unique<Plateform>(textures, 1);
+	p2->setPosition(sf::Vector2f(5450, 350));
+	sceneLayers[Front]->attachChild(std::move(p2));
+
+	std::unique_ptr<Shadow> s3 = std::make_unique<Shadow>(textures, 1);
+	s3->setPosition(sf::Vector2f(5650, 1550));
+	sceneLayers[Front]->attachChild(std::move(s3));
+
+	std::unique_ptr<Plateform> p3 = std::make_unique<Plateform>(textures, 1);
+	p3->setPosition(sf::Vector2f(5650, 1500));
+	sceneLayers[Front]->attachChild(std::move(p3));
+
+	
 	//The Last One
-	posLamps.push_back(sf::Vector2f(5350, 150));
-	posLamps.push_back(sf::Vector2f(5550, 150));
-	posPF1.push_back(sf::Vector2f(5450, 350));
-	posSh1.push_back(sf::Vector2f(5450, 400));
+	posLamps.push_back(sf::Vector2f(6350, 1300));
+	posLamps.push_back(sf::Vector2f(6550, 1300));
+	posPF1.push_back(sf::Vector2f(6450, 1500));
+	posSh1.push_back(sf::Vector2f(6450, 1550));
 
 
 	//On cree le level
 	//On cree les ombres en premier pour qu'elles soient en dessous
 	for (auto position : posSh1) {
-		std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures, 1);
-		s->setPosition(sf::Vector2f(position));
-		sceneLayers[Front]->attachChild(std::move(s));
+
+			std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures, 1);
+			s->setPosition(sf::Vector2f(position));
+			sceneLayers[Front]->attachChild(std::move(s));
 	}
+
 	for (auto position : posSh2) {
 		std::unique_ptr<Shadow> s = std::make_unique<Shadow>(textures, 2);
 		s->setPosition(sf::Vector2f(position));
@@ -305,9 +333,9 @@ void World::buildLevel() {
 
 	//Puis les plateformes
 	for (auto position : posPF1) {
-		std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1, 5);
-		p->setPosition(sf::Vector2f(position));
-		sceneLayers[Front]->attachChild(std::move(p));
+			std::unique_ptr<Plateform> p = std::make_unique<Plateform>(textures, 1);
+			p->setPosition(sf::Vector2f(position));
+			sceneLayers[Front]->attachChild(std::move(p));
 	}
 
 	for (auto position : posPF2) {

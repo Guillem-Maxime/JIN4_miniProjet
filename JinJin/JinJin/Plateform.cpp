@@ -27,8 +27,9 @@ Plateform::Plateform(const TextureHolder & textures, int type) : inversed(false)
 	setVelocity(10,0);
 }
 
-Plateform::Plateform(const TextureHolder & textures, int type, int range) : Plateform(textures,type)
+Plateform::Plateform(const TextureHolder & textures, int type, int range, bool isHor) : Plateform(textures,type)
 {
+	isHorizontal = isHor;
 	isMoving = true;
 	this->range = range;
 	time = sf::Time::Zero;
@@ -69,7 +70,14 @@ void Plateform::updateCurrent(sf::Time dt)
 	if (isMoving)
 	{
 		time += dt;
-		nextMoove = range * cos( 2* time.asSeconds());
-		move(sf::Vector2f(nextMoove,0));
+		if (isHorizontal) {
+			nextMove = range * cos(2 * time.asSeconds());
+			move(sf::Vector2f(nextMove, 0));
+		}
+		else {
+			nextMove = range * cos(2 * time.asSeconds());
+			move(sf::Vector2f(0, nextMove));
+		}
+
 	}
 }

@@ -16,12 +16,12 @@ sf::Vector2f Entity::getVelocity() const
 	return velocity;
 }
 
-void Entity::setNextMoove(float nm)
+void Entity::setNextMove(float nm)
 {
-	nextMoove = nm;
+	nextMove = nm;
 }
 
 void Entity::updateCurrent(sf::Time dt)
 {
-	move(velocity.x * dt.asSeconds() + nextMoove,velocity.y *dt.asSeconds());
+	move(velocity.x * dt.asSeconds() + nextMove,velocity.y *dt.asSeconds());
 }

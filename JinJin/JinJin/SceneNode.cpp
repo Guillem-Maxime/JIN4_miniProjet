@@ -75,9 +75,9 @@ bool SceneNode::checkNodeCollision(SceneNode & node, float& pos)
 	if (this != &node && this->getCategory() != node.getCategory() && collision(*this, node))
 	{
 		if (node.getCategory() == Category::Platform)
-			pos = node.nextMoove;
+			pos = node.nextMove;
 		else
-			pos = this->nextMoove;
+			pos = this->nextMove;
 		return true;
 	}
 

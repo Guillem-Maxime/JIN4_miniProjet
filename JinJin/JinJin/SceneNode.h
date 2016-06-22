@@ -36,7 +36,7 @@ public:
 	bool checkSceneCollision(SceneNode& sceneGraph, float& pos);
 
 protected:
-	float nextMoove;
+	float nextMove;
 
 private:
 
