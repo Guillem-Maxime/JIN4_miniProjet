@@ -29,7 +29,7 @@ Plateform::Plateform(const TextureHolder & textures, int type) : inversed(false)
 
 Plateform::Plateform(const TextureHolder & textures, int type, int range) : Plateform(textures,type)
 {
-	isMooving = true;
+	isMoving = true;
 	this->range = range;
 	time = sf::Time::Zero;
 }

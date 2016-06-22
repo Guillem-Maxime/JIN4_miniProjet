@@ -17,5 +17,8 @@ public:
 private:
 	sf::Sprite sprite;
 	bool inversed;
+	bool isMoving;
+	int range;
+	sf::Time time;
 };
 

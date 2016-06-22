@@ -2,7 +2,7 @@
 #include <iostream>
 
 /* Définition constante du temps d'une frame*/
-const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
+const sf::Time TimePerFrame = sf::seconds(1.f / 30.f);
 
 Game::Game() : window(sf::VideoMode(1600, 900), "Jin Jin"), evHandler(), world(window, evHandler)
 {

@@ -274,11 +274,17 @@ void World::buildLevel() {
 	posPF3.push_back(sf::Vector2f(4850, 600));
 	posSh3.push_back(sf::Vector2f(5000, 585));
 
+
+	//Les plateformes mouvantes (les torches ne bougent pas en adéquation par contre).
+	posPF1.push_back(sf::Vector2f(5450, 250));
+	posSh1.push_back(sf::Vector2f(5450, 300));
+
+
 	//The Last One
-	posLamps.push_back(sf::Vector2f(5350, 450));
-	posLamps.push_back(sf::Vector2f(5550, 450));
-	posPF1.push_back(sf::Vector2f(5450, 650));
-	posSh1.push_back(sf::Vector2f(5450, 700));
+	posLamps.push_back(sf::Vector2f(5350, 150));
+	posLamps.push_back(sf::Vector2f(5550, 150));
+	posPF1.push_back(sf::Vector2f(5450, 350));
+	posSh1.push_back(sf::Vector2f(5450, 400));
 
 
 	//On cree le level
