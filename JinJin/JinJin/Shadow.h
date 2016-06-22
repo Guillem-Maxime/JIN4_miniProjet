@@ -24,5 +24,6 @@ private:
 	bool isHorizontal;
 	int range;
 	sf::Time time;
+	int ticks;
 };
 

@@ -24,7 +24,7 @@ void World::update(sf::Time dt)
 	//Gravité exercé sur le joueur
 
 	//Le joueur touche-t-il le sol ? Si oui, plus de gravité
-	float posP = 0.f;
+	sf::Vector2f posP = sf::Vector2f(0.f,0.f);
 	player->setGrounded(sceneGraph.checkSceneCollision(sceneGraph,posP));
 	if (!player->getGrounded() && !player->getJumping())
 	{
@@ -78,7 +78,7 @@ void World::update(sf::Time dt)
 	//La vue du monde est centrée sur le joueur (mêmes mouvements que lui et est contrainte aussi)
 	sf::FloatRect viewBounds(worldView.getCenter() - worldView.getSize() / 2.f, worldView.getSize());
 
-	worldView.move(player->getVelocity().x * dt.asSeconds() + posP, player->getVelocity().y * dt.asSeconds());
+	worldView.move(player->getVelocity() * dt.asSeconds() + posP);
 
 	sf::Vector2f center = worldView.getCenter();
 	center.x = std::min(center.x, worldBounds.width -borderDistance );
@@ -222,11 +222,11 @@ void World::buildLevel() {
 	//La longue plateforme seule qui bouge (sans la torche)
 	posLamps.push_back(sf::Vector2f(1400, 1230));
 
-	std::unique_ptr<Shadow> s1 = std::make_unique<Shadow>(textures, 1, 15, false);
+	std::unique_ptr<Shadow> s1 = std::make_unique<Shadow>(textures, 1, 200, false);
 	s1->setPosition(sf::Vector2f(1400, 1315));
 	sceneLayers[Front]->attachChild(std::move(s1));
 
-	std::unique_ptr<Plateform> p1 = std::make_unique<Plateform>(textures, 1, 15, false);
+	std::unique_ptr<Plateform> p1 = std::make_unique<Plateform>(textures, 1, 200, false);
 	p1->setPosition(sf::Vector2f(1400, 1295));
 	sceneLayers[Front]->attachChild(std::move(p1));
 
@@ -286,19 +286,19 @@ void World::buildLevel() {
 
 	//Les deux plateformes qui bougent (sans lampes)
 
-	std::unique_ptr<Shadow> s2 = std::make_unique<Shadow>(textures, 1, 20, false);
-	s2->setPosition(sf::Vector2f(5450, 650));
+	std::unique_ptr<Shadow> s2 = std::make_unique<Shadow>(textures, 1, 400, false);
+	s2->setPosition(sf::Vector2f(5450, 1050));
 	sceneLayers[Front]->attachChild(std::move(s2));
 
-	std::unique_ptr<Plateform> p2 = std::make_unique<Plateform>(textures, 1, 20, false);
-	p2->setPosition(sf::Vector2f(5450, 600));
+	std::unique_ptr<Plateform> p2 = std::make_unique<Plateform>(textures, 1, 400, false);
+	p2->setPosition(sf::Vector2f(5450, 1000));
 	sceneLayers[Front]->attachChild(std::move(p2));
 
-	std::unique_ptr<Shadow> s3 = std::make_unique<Shadow>(textures, 1, 15, true);
+	std::unique_ptr<Shadow> s3 = std::make_unique<Shadow>(textures, 1, 400, true);
 	s3->setPosition(sf::Vector2f(5650, 1450));
 	sceneLayers[Front]->attachChild(std::move(s3));
 
-	std::unique_ptr<Plateform> p3 = std::make_unique<Plateform>(textures, 1, 15, true);
+	std::unique_ptr<Plateform> p3 = std::make_unique<Plateform>(textures, 1, 400, true);
 	p3->setPosition(sf::Vector2f(5650, 1400));
 	sceneLayers[Front]->attachChild(std::move(p3));
 

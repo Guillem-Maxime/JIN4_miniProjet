@@ -62,14 +62,17 @@ void Shadow::updateCurrent(sf::Time dt)
 	if (isMoving)
 	{
 		time += dt;
-		if (isHorizontal) {
-			nextMove = range * cos(2 * time.asSeconds());
-			move(sf::Vector2f(nextMove, 0));
-		}
-		else {
-			nextMove = range * cos(2 * time.asSeconds());
-			move(sf::Vector2f(0, nextMove));
+		ticks++;
+		if (isHorizontal)
+		{
+			nextMove = sf::Vector2f(range * cos(ticks / 60) * dt.asSeconds(), 0);
+
+		} else
+		{
+			nextMove = sf::Vector2f(0, range * cos(ticks / 60)* dt.asSeconds());
+
 		}
 
+		move(nextMove);
 	}
 }

@@ -27,5 +27,6 @@ private:
 	bool isHorizontal;	//Ce booleen indique si le mouvement est horizontal (true) ou vertical (false)
 	int range;			//Cet int indique de quelle distance ce déplace la plateforme
 	sf::Time time;
+	int ticks;
 };
 

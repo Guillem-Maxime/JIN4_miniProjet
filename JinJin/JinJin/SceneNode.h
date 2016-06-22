@@ -32,11 +32,11 @@ public:
 	void onCommand(const Command& command, sf::Time dt);
 
 	virtual sf::FloatRect getBoundingRect() const;
-	bool checkNodeCollision(SceneNode& node, float& pos);
-	bool checkSceneCollision(SceneNode& sceneGraph, float& pos);
+	bool checkNodeCollision(SceneNode& node, sf::Vector2f& pos);
+	bool checkSceneCollision(SceneNode& sceneGraph, sf::Vector2f& pos);
 
 protected:
-	float nextMove;
+	sf::Vector2f nextMove;
 
 private:
 
