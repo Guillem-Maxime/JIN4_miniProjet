@@ -1,4 +1,6 @@
+
 #include "World.h"
+
 
 #include <iostream>
 
@@ -15,7 +17,7 @@ World::World(sf::RenderWindow & window, EventHandler &handler) : window(window),
 
 	worldView.setCenter(spawnPosition);
 
-	window.setFramerateLimit(60);
+	window.setFramerateLimit(FPSFramerate);
 }
 
 void World::update(sf::Time dt)
